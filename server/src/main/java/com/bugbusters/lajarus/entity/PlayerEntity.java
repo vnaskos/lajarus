@@ -12,6 +12,7 @@ public class PlayerEntity {
 
 	@Id
 	@GeneratedValue
+        @Column(name = "id", nullable = false)
 	private long id;
 	
 	@Column(name = "name", nullable = false)

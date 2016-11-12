@@ -32,5 +32,11 @@ public class PlayerController {
 	public Player findPlayerByName(@PathVariable String name) throws Exception {
 		return playerService.findPlayerByName(name);
 	}
+        
+        @RequestMapping(value = "/nearPlayers/{name}", method = RequestMethod.GET )
+        public List<PlayerEntity> findPlayersNearToCurrentPlayer( @PathVariable String name) throws Exception 
+        {
+                return playerService.findPlayersNearToCurrentPlayer( name );
+        }
 	
 }
