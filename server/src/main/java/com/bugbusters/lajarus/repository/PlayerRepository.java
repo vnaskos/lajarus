@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.bugbusters.lajarus.entity.PlayerEntity;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<PlayerEntity, Long>{
-	
-	@Query("SELECT p FROM PlayerEntity p WHERE p.name = :name")
-	public PlayerEntity findPlayerByName(@Param("name") String name);
-	
+public interface PlayerRepository extends JpaRepository<PlayerEntity, Long> {
+
+    @Query("SELECT p FROM PlayerEntity p WHERE p.name = :name")
+    public PlayerEntity findPlayerByName(@Param("name") String name);
+
 }

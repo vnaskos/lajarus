@@ -15,28 +15,27 @@ import com.bugbusters.lajarus.service.PlayerService;
 @RestController
 @RequestMapping(value = "/player")
 public class PlayerController {
-	
-	private PlayerService playerService;
-	
-	@Autowired
-	public PlayerController(PlayerService playerService) {
-		this.playerService = playerService;
-	}
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<PlayerEntity> getAll() {
-		return playerService.getAll();
-	}
-	
-	@RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
-	public Player findPlayerByName(@PathVariable String name) throws Exception {
-		return playerService.findPlayerByName(name);
-	}
-        
-        @RequestMapping(value = "/nearPlayers/{name}", method = RequestMethod.GET )
-        public List<PlayerEntity> findPlayersNearToCurrentPlayer( @PathVariable String name) throws Exception 
-        {
-                return playerService.findPlayersNearToCurrentPlayer( name );
-        }
-	
+    private PlayerService playerService;
+
+    @Autowired
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public List<PlayerEntity> getAll() {
+        return playerService.getAll();
+    }
+
+    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
+    public Player findPlayerByName(@PathVariable String name) throws Exception {
+        return playerService.findPlayerByName(name);
+    }
+
+    @RequestMapping(value = "/nearPlayers/{name}", method = RequestMethod.GET)
+    public List<PlayerEntity> findPlayersNearToCurrentPlayer(@PathVariable String name) throws Exception {
+        return playerService.findPlayersNearToCurrentPlayer(name);
+    }
+
 }
