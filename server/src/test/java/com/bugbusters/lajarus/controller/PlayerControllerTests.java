@@ -18,25 +18,25 @@ import com.bugbusters.lajarus.model.Player;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class PlayerControllerTests {
 
-	@Autowired
-	PlayerController playerController;
-	
-	@Test
-	public void createPlayerControllerTest() {
-		assertNotNull(playerController);
-	}
+    @Autowired
+    PlayerController playerController;
 
-	@Test
-	public void getAllPlayersTest() {
-		List<PlayerEntity> players = playerController.getAll();
-		assertEquals(players.size(), 2);
-	}
-	
-	@Test
-	public void findPlayerByNameAdminTest() throws Exception {
-		Player p = playerController.findPlayerByName("admin");
-		assertNotNull(p);
-		assertEquals(p.getName(), "admin");
-	}
-	
+    @Test
+    public void createPlayerControllerTest() {
+        assertNotNull(playerController);
+    }
+
+    @Test
+    public void getAllPlayersTest() {
+        List<PlayerEntity> players = playerController.getAll();
+        assertFalse(players.isEmpty());
+    }
+
+    @Test
+    public void findPlayerByNameAdminTest() throws Exception {
+        Player p = playerController.findPlayerByName("admin");
+        assertNotNull(p);
+        assertEquals(p.getName(), "admin");
+    }
+
 }
