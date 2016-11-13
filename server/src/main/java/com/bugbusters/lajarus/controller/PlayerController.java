@@ -37,5 +37,10 @@ public class PlayerController {
     public List<PlayerEntity> findPlayersNearToCurrentPlayer(@PathVariable String name) throws Exception {
         return playerService.findPlayersNearToCurrentPlayer(name);
     }
-
+    
+    @RequestMapping( value = "/{name}/location/{latitude}/{longitude}", method = RequestMethod.POST )
+    public void updatePlayerLocation( @PathVariable String name, @PathVariable String latitude, @PathVariable String longitude ) throws Exception
+    {
+        playerService.updatePlayerLocation(name, latitude, longitude);
+    }
 }

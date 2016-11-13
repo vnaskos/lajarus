@@ -17,8 +17,11 @@ public class PlayerEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
-
+    
+    @Column(name = "latitude", nullable = false)
     private double latitude;
+    
+    @Column(name = "longitude", nullable = false)
     private double longitude;
 
     public PlayerEntity() {

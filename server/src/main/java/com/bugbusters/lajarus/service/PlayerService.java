@@ -67,4 +67,12 @@ public class PlayerService {
             return false;
         }
     }
+    
+    public void updatePlayerLocation(String name,String latitude,String longitude)
+    {
+        double tmp_long, tmp_lat;
+        tmp_lat = Double.parseDouble( latitude );
+        tmp_long = Double.parseDouble( longitude );
+        playerRepository.updatePlayerLocation( name, tmp_lat, tmp_long );
+    }
 }
