@@ -10,6 +10,7 @@ import com.bugbusters.lajarus.model.Player;
 import com.bugbusters.lajarus.model.PlayerFactory;
 import com.bugbusters.lajarus.repository.PlayerRepository;
 import java.util.ArrayList;
+import javax.persistence.NoResultException;
 
 @Service
 public class PlayerService {
@@ -29,7 +30,8 @@ public class PlayerService {
         PlayerEntity playerEntity = playerRepository.findPlayerByName(name);
 
         if (playerEntity == null) {
-            throw new Exception("User " + name + " does not exist");
+            throw new NoResultException(
+                    String.format("Player %s was not found!", name));
         }
 
         return PlayerFactory.create(playerEntity);
