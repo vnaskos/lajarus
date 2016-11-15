@@ -9,9 +9,6 @@ import com.bugbusters.lajarus.security.entity.User;
 import com.bugbusters.lajarus.security.JwtUserFactory;
 import com.bugbusters.lajarus.security.repository.UserRepository;
 
-/**
- * Created by stephan on 20.03.16.
- */
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 

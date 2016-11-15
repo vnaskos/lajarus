@@ -16,6 +16,7 @@ jwt:
     authentication:
       path: auth
       refresh: refresh
+      register: register
 
 #logging:
 #  level:

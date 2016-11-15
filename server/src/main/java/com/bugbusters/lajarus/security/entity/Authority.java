@@ -1,12 +1,17 @@
 package com.bugbusters.lajarus.security.entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ *
+ * @author Vasilis Naskos
+ */
 @Entity
 @Table(name = "AUTHORITY")
-public class Authority {
+public class Authority implements Serializable {
 
     @Id
     @Column(name = "ID")

@@ -1,8 +1,12 @@
 package com.bugbusters.lajarus.security;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,14 +60,14 @@ public class JwtTokenUtil implements Serializable {
     }
 
     public Date getExpirationDateFromToken(String token) {
-        Date expiration;
+        Date tpkenExpiration;
         try {
             final Claims claims = getClaimsFromToken(token);
-            expiration = claims.getExpiration();
+            tpkenExpiration = claims.getExpiration();
         } catch (Exception e) {
-            expiration = null;
+            tpkenExpiration = null;
         }
-        return expiration;
+        return tpkenExpiration;
     }
 
     public String getAudienceFromToken(String token) {
@@ -84,7 +88,9 @@ public class JwtTokenUtil implements Serializable {
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
-        } catch (Exception e) {
+        } catch (ExpiredJwtException | MalformedJwtException
+                | SignatureException | UnsupportedJwtException
+                | IllegalArgumentException e) {
             claims = null;
         }
         return claims;
@@ -95,8 +101,8 @@ public class JwtTokenUtil implements Serializable {
     }
 
     private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
-        return expiration.before(new Date());
+        final Date tokenExpiration = getExpirationDateFromToken(token);
+        return tokenExpiration.before(new Date());
     }
 
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
@@ -159,9 +165,8 @@ public class JwtTokenUtil implements Serializable {
         final String username = getUsernameFromToken(token);
         final Date created = getCreatedDateFromToken(token);
         //final Date expiration = getExpirationDateFromToken(token);
-        return (
-                username.equals(user.getUsername())
-                        && !isTokenExpired(token)
-                        && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
+        return (username.equals(user.getUsername())
+                && !isTokenExpired(token)
+                && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate()));
     }
 }

@@ -1,5 +1,6 @@
 package com.bugbusters.lajarus.security.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +20,13 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author Vasilis Naskos
+ */
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Serializable {
 
     @Id
     @Column(name = "ID")
