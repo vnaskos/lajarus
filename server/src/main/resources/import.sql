@@ -1,4 +1,3 @@
-# noinspection SqlNoDataSourceInspectionForFile
 INSERT INTO player (id, name, latitude, longitude) VALUES (1, 'admin', 40.2, 45.4);
 INSERT INTO player (id, name, latitude, longitude) VALUES (2, 'user1', 40.2003, 45.4);
 INSERT INTO player (id, name, latitude, longitude) VALUES (3, 'giorgis', 40.1, 44.7);

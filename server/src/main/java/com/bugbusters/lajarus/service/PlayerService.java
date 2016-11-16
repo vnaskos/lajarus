@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bugbusters.lajarus.entity.PlayerEntity;
-import com.bugbusters.lajarus.model.Player;
-import com.bugbusters.lajarus.model.PlayerFactory;
 import com.bugbusters.lajarus.repository.PlayerRepository;
 import java.util.ArrayList;
 import javax.persistence.NoResultException;
@@ -15,18 +13,18 @@ import javax.persistence.NoResultException;
 @Service
 public class PlayerService {
 
-    private PlayerRepository playerRepository;
+    private final PlayerRepository playerRepository;
 
     @Autowired
     public PlayerService(PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;
     }
 
-    public List<PlayerEntity> getAll() {
+    public List<PlayerEntity> findAll() {
         return playerRepository.findAll();
     }
 
-    public Player findPlayerByName(String name) throws Exception {
+    public PlayerEntity findPlayerByName(String name) throws NoResultException {
         PlayerEntity playerEntity = playerRepository.findPlayerByName(name);
 
         if (playerEntity == null) {
@@ -34,7 +32,7 @@ public class PlayerService {
                     String.format("Player %s was not found!", name));
         }
 
-        return PlayerFactory.create(playerEntity);
+        return playerEntity;
     }
 
     public List<PlayerEntity> findPlayersNearToCurrentPlayer(String name) throws Exception {

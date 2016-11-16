@@ -1,12 +1,14 @@
 package com.bugbusters.lajarus.exception;
 
 import java.util.Map;
+import javax.naming.AuthenticationException;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +39,23 @@ public class GlobalExceptionHandler {
         
         return new ResponseEntity<>(responseBody, 
                 HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    @ExceptionHandler(value = BadCredentialsException.class)
+    public ResponseEntity<Map<String, Object>> handleAuthenticationException(
+            Exception exception, HttpServletRequest request) {
+        logger.error("< Handle authenticationException");
+        
+        ExceptionAttributes exceptionAttributes = new DefaultExceptionAttributes();
+        
+        Map<String, Object> responseBody = exceptionAttributes
+                .getExceptionAttributes(exception, request,
+                        HttpStatus.UNAUTHORIZED);
+        
+        logger.error("> Handle authenticationException");
+        
+        return new ResponseEntity<>(responseBody, 
+                HttpStatus.UNAUTHORIZED);
     }
     
     @ExceptionHandler(value = NoResultException.class)

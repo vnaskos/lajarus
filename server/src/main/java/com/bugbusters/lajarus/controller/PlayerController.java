@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bugbusters.lajarus.entity.PlayerEntity;
-import com.bugbusters.lajarus.model.Player;
 import com.bugbusters.lajarus.service.PlayerService;
 
 @RestController
 @RequestMapping(value = "/player")
 public class PlayerController {
 
-    private PlayerService playerService;
+    private final PlayerService playerService;
 
     @Autowired
     public PlayerController(PlayerService playerService) {
@@ -24,12 +23,12 @@ public class PlayerController {
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<PlayerEntity> getAll() {
-        return playerService.getAll();
+    public List<PlayerEntity> findAll() {
+        return playerService.findAll();
     }
 
     @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
-    public Player findPlayerByName(@PathVariable String name) throws Exception {
+    public PlayerEntity findPlayerByName(@PathVariable String name) throws Exception {
         return playerService.findPlayerByName(name);
     }
 
