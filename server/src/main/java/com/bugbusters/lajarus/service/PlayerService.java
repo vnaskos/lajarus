@@ -53,7 +53,7 @@ public class PlayerService {
 
     }
 
-    public boolean isInsideOfRadius(double center_x, double center_y, double x, double y, double radius) {
+    public static boolean isInsideOfRadius(double center_x, double center_y, double x, double y, double radius) {
 //            double tmpX;
 //            double tmpY;
 //            tmpX = x - center_x;

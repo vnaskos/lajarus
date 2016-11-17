@@ -14,3 +14,10 @@ INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (1, 1);
 INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (1, 2);
 INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (2, 1);
 INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (3, 1);
+
+INSERT INTO quest (id, name, latitude, longitude, description) VALUES (0, 'myQuest1', 40.3, 45.4, 'Do something1(Description)');
+INSERT INTO quest (id, name, latitude, longitude, description) VALUES (1, 'myQuest2', 40.2, 45.5, 'Do something2(Description)');
+INSERT INTO quest (id, name, latitude, longitude, description) VALUES (2, 'myQuest3', 40.9, 45.7, 'Do something3(Description)');
+
+INSERT INTO quest (id, name, latitude, longitude, description) VALUES (3, 'myQuest3', 40.20003, 45.4, 'Do something2(Description)');
+INSERT INTO quest (id, name, latitude, longitude, description) VALUES (4, 'myQuest4', 40.2, 45.4, 'Do something3(Description)');
