@@ -1,5 +1,6 @@
-package com.bugbusters.lajarus.security.service;
+package com.bugbusters.lajarus.service;
 
+import com.bugbusters.lajarus.service.JwtUserDetailsServiceImpl;
 import com.bugbusters.lajarus.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;

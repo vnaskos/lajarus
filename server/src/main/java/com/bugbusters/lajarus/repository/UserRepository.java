@@ -1,4 +1,4 @@
-package com.bugbusters.lajarus.security.repository;
+package com.bugbusters.lajarus.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.bugbusters.lajarus.security.entity.User;

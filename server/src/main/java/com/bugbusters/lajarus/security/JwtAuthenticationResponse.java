@@ -1,4 +1,4 @@
-package com.bugbusters.lajarus.security.service;
+package com.bugbusters.lajarus.security;
 
 import java.io.Serializable;
 

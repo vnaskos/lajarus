@@ -1,4 +1,4 @@
-package com.bugbusters.lajarus.security.controller;
+package com.bugbusters.lajarus.controller;
 
 import com.bugbusters.lajarus.AbstractControllerTest;
 import org.json.JSONObject;

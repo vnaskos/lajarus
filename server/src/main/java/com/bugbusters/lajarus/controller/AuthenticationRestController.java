@@ -1,4 +1,4 @@
-package com.bugbusters.lajarus.security.controller;
+package com.bugbusters.lajarus.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bugbusters.lajarus.security.JwtAuthenticationRequest;
 import com.bugbusters.lajarus.security.JwtTokenUtil;
 import com.bugbusters.lajarus.security.JwtUser;
-import com.bugbusters.lajarus.security.service.JwtAuthenticationResponse;
+import com.bugbusters.lajarus.security.JwtAuthenticationResponse;
 
 import javax.servlet.http.HttpServletRequest;
 

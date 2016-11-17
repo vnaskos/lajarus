@@ -1,4 +1,4 @@
-package com.bugbusters.lajarus.security.service;
+package com.bugbusters.lajarus.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.bugbusters.lajarus.security.entity.User;
 import com.bugbusters.lajarus.security.JwtUserFactory;
-import com.bugbusters.lajarus.security.repository.UserRepository;
+import com.bugbusters.lajarus.repository.UserRepository;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
@@ -16,7 +16,8 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         
         if (user == null) {
@@ -25,5 +26,9 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
         }
         
         return JwtUserFactory.create(user);
+    }
+    
+    public void addUser(User user) {
+        userRepository.saveAndFlush(user);
     }
 }
