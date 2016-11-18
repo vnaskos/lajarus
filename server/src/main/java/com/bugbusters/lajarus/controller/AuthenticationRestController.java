@@ -19,8 +19,14 @@ import com.bugbusters.lajarus.security.JwtAuthenticationRequest;
 import com.bugbusters.lajarus.security.JwtTokenUtil;
 import com.bugbusters.lajarus.security.JwtUser;
 import com.bugbusters.lajarus.security.JwtAuthenticationResponse;
+import com.bugbusters.lajarus.security.entity.User;
+import com.bugbusters.lajarus.service.JwtUserDetailsServiceImpl;
+import com.bugbusters.lajarus.validation.UserValidator;
+import com.bugbusters.lajarus.validation.ValidationErrorBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import org.springframework.validation.Errors;
 
 @RestController
 public class AuthenticationRestController {
@@ -35,7 +41,10 @@ public class AuthenticationRestController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private JwtUserDetailsServiceImpl userDetailsService;
+    
+    @Autowired
+    private UserValidator userValidator;
 
     @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(
@@ -71,6 +80,22 @@ public class AuthenticationRestController {
         } else {
             return ResponseEntity.badRequest().body(null);
         }
+    }
+    
+    @RequestMapping(value = "${jwt.route.authentication.register}", method = RequestMethod.POST)
+    public ResponseEntity<?> registerUser(HttpServletRequest request,
+            @RequestBody User userForm, Errors errors) {
+        userValidator.validate(userForm, errors);
+        
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest()
+                    .body(ValidationErrorBuilder
+                            .fromBindingErrors(errors));
+        }
+        
+        userDetailsService.addNewUser(userForm);
+
+        return ResponseEntity.ok(userForm.getFirstname());
     }
 
 }
