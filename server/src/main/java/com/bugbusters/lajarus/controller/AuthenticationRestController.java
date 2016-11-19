@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,10 +24,16 @@ import com.bugbusters.lajarus.validation.UserValidator;
 import com.bugbusters.lajarus.validation.ValidationErrorBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import org.jsondoc.core.annotation.Api;
+import org.jsondoc.core.annotation.ApiMethod;
+import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.validation.Errors;
 
 @RestController
+@RequestMapping(value = "/auth")
+@Api(name = "User authentication API",
+        description = "Provides methods for user login and register",
+        stage = ApiStage.RC)
 public class AuthenticationRestController {
 
     @Value("${jwt.header}")
@@ -46,7 +51,8 @@ public class AuthenticationRestController {
     @Autowired
     private UserValidator userValidator;
 
-    @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ApiMethod(description = "Create authentication token")
     public ResponseEntity<?> createAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest, Device device)
             throws AuthenticationException {
@@ -68,7 +74,8 @@ public class AuthenticationRestController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
-    @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
+    @RequestMapping(value = "/refresh", method = RequestMethod.GET)
+    @ApiMethod(description = "Refresh an existing authentication token")
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);
@@ -82,7 +89,8 @@ public class AuthenticationRestController {
         }
     }
     
-    @RequestMapping(value = "${jwt.route.authentication.register}", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ApiMethod(description = "Register a new user")
     public ResponseEntity<?> registerUser(HttpServletRequest request,
             @RequestBody User userForm, Errors errors) {
         userValidator.validate(userForm, errors);

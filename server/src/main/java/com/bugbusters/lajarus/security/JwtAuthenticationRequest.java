@@ -1,12 +1,16 @@
 package com.bugbusters.lajarus.security;
 
 import java.io.Serializable;
+import org.jsondoc.core.annotation.ApiObject;
+import org.jsondoc.core.annotation.ApiObjectField;
 
+@ApiObject(name = "Authentication credentials")
 public class  JwtAuthenticationRequest implements Serializable {
 
-    private static final long serialVersionUID = -8445943548965154778L;
-
+    @ApiObjectField(description = "Registered username", required = true)
     private String username;
+    
+    @ApiObjectField(description = "Password associated with the username", required = true)
     private String password;
 
     public JwtAuthenticationRequest() {
