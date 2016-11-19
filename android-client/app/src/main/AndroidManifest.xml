@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".second" />
         <activity android:name=".third" />
-        <activity android:name=".fourth"></activity>
+        <activity android:name=".fourth" />
+        <activity android:name=".register"></activity>
     </application>
 
 </manifest>
