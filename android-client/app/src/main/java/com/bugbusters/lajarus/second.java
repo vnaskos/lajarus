@@ -20,10 +20,21 @@ public class second extends AppCompatActivity {
         });
     }
 
+    public void init5(){
+        but1 = (Button)findViewById(R.id.button9);
+        but1.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Intent toy = new Intent(second.this,Map.class);
+                startActivity(toy);
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         init4();
+        init5();
     }
 }
