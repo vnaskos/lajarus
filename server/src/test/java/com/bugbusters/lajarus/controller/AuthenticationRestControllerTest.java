@@ -23,7 +23,7 @@ public class AuthenticationRestControllerTest extends AbstractControllerTest {
     
     @Test
     public void loginAsAdminTest() throws Exception {
-        String uri = "/auth";
+        String uri = "/auth/login";
         
         MvcResult result = mvc.perform(
                 MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON)
@@ -41,7 +41,7 @@ public class AuthenticationRestControllerTest extends AbstractControllerTest {
     
     @Test
     public void refreshAdminTokenTest() throws Exception {
-        String uri = "/auth";
+        String uri = "/auth/login";
         
         MvcResult result = mvc.perform(
                 MockMvcRequestBuilders.post(uri).contentType(MediaType.APPLICATION_JSON)
@@ -58,7 +58,7 @@ public class AuthenticationRestControllerTest extends AbstractControllerTest {
         
         Assert.assertNotNull("failure - expected token not null", token);
         
-        uri = "/refresh";
+        uri = "/auth/refresh";
         result = mvc.perform(
                 MockMvcRequestBuilders.get(uri).header("Authorization", token)
                         .accept(MediaType.APPLICATION_JSON)).andReturn();
