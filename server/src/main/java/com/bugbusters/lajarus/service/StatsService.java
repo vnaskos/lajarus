@@ -36,7 +36,7 @@ public class StatsService {
         return statsRepository.findAll();
     }
     
-    public void createStats( String health, String power, String defence, String speed ) 
+    public void createStats( int health, int power, int defence, int speed ) 
     {
         
         StatsEntity statsEntity = new StatsEntity();
