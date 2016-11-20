@@ -12,6 +12,9 @@ public class StatsEntity {
     
     @Id
     @GeneratedValue
+    @Column(name = "id", nullable = false)
+    private long id;
+    
     @Column(name = "level", nullable = false)
     private long level;
     
@@ -29,6 +32,20 @@ public class StatsEntity {
     
     public StatsEntity() {
         
+    }
+    
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**
@@ -99,6 +116,14 @@ public class StatsEntity {
      */
     public void setSpeed(String speed) {
         this.speed = speed;
+    }
+
+    public void setDefence(String defence) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setPower(String power) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
