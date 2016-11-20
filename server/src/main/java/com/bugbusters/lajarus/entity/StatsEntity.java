@@ -12,95 +12,115 @@ public class StatsEntity {
     
     @Id
     @GeneratedValue
+    @Column(name = "id", nullable = false)
+    private long id;
+    
     @Column(name = "level", nullable = false)
-    private long level;
+    private int level;
     
     @Column(name = "health", nullable = false)
-    private String health;
+    private int health;
     
     @Column(name = "power", nullable = false)
-    private double power;
+    private int power;
     
     @Column(name = "defence", nullable = false)
-    private double defence;
+    private int defence;
     
     @Column(name = "speed", nullable = false)
-    private String speed;
+    private int speed;
     
     public StatsEntity() {
         
+    }
+    
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**
      * @return the level
      */
-    public long getLevel() {
+    public int getLevel() {
         return level;
     }
 
     /**
      * @param level the level to set
      */
-    public void setLevel(long level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
     /**
      * @return the health
      */
-    public String getHealth() {
+    public int getHealth() {
         return health;
     }
 
     /**
      * @param health the health to set
      */
-    public void setHealth(String health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 
     /**
      * @return the power
      */
-    public double getPower() {
+    public int getPower() {
         return power;
     }
 
     /**
      * @param power the power to set
      */
-    public void setPower(double power) {
+    public void setPower(int power) {
         this.power = power;
     }
 
     /**
      * @return the defense
      */
-    public double getDefence() {
+    public int getDefence() {
         return defence;
     }
 
     /**
      * @param defence the defense to set
      */
-    public void setDefence(double defence) {
+    public void setDefence(int defence) {
         this.defence = defence;
     }
 
     /**
      * @return the speed
      */
-    public String getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
     /**
      * @param speed the speed to set
      */
-    public void setSpeed(String speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
+
     
+
+   
     
 }
 
