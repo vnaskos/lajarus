@@ -103,7 +103,7 @@ public class AuthenticationRestController {
         
         userDetailsService.addNewUser(userForm);
 
-        return ResponseEntity.ok(userForm.getFirstname());
+        return ResponseEntity.ok(userForm.getUsername());
     }
 
 }

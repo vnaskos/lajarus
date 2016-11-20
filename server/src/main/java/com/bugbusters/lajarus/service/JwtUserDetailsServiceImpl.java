@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bugbusters.lajarus.security.entity.User;
 import com.bugbusters.lajarus.security.JwtUserFactory;
 import com.bugbusters.lajarus.repository.UserRepository;
+import java.util.Date;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
@@ -32,6 +33,18 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     }
     
     public void addNewUser(User userForm) {
+        if(userForm.getEnabled() == null) {
+            userForm.setEnabled(Boolean.TRUE);
+        }
+        if(userForm.getFirstname()== null) {
+            userForm.setFirstname("");
+        }
+        if(userForm.getLastname() == null) {
+            userForm.setLastname("");
+        }
+        if(userForm.getLastPasswordResetDate() == null) {
+            userForm.setLastPasswordResetDate(new Date());
+        }
         userForm.setPassword(passwordEncoder.encode(userForm.getPassword()));
         userRepository.saveAndFlush(userForm);
     }

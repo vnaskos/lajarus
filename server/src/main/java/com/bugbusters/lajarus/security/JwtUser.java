@@ -1,5 +1,6 @@
 package com.bugbusters.lajarus.security;
 
+import com.bugbusters.lajarus.entity.PlayerEntity;
 import java.util.Collection;
 import java.util.Date;
 
@@ -17,6 +18,7 @@ public class JwtUser implements UserDetails {
     private final String password;
     private final String email;
     private final Collection<? extends GrantedAuthority> authorities;
+    private final Collection<PlayerEntity> players;
     private final boolean enabled;
     private final Date lastPasswordResetDate;
 
@@ -28,6 +30,7 @@ public class JwtUser implements UserDetails {
             String email,
             String password,
             Collection<? extends GrantedAuthority> authorities,
+            Collection<PlayerEntity> players,
             boolean enabled,
             Date lastPasswordResetDate
     ) {
@@ -38,6 +41,7 @@ public class JwtUser implements UserDetails {
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.players = players;
         this.enabled = enabled;
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
@@ -91,6 +95,10 @@ public class JwtUser implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    public Collection<PlayerEntity> getPlayers() {
+        return players;
     }
 
     @Override

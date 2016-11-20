@@ -45,7 +45,7 @@ public class UserValidator implements Validator {
                     "Password size must be 4-50 characters long");
         }
         
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", 
+        /*ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", 
                 "NotEmpty", "Firstname field is emtpy");
         if (user.getFirstname().length() < 4 || user.getFirstname().length() > 50) {
             errors.rejectValue("firstname", "Size.userForm.firstname",
@@ -57,7 +57,7 @@ public class UserValidator implements Validator {
         if (user.getLastname().length() < 4 || user.getLastname().length() > 50) {
             errors.rejectValue("lastname", "Size.userForm.lastname",
                     "Lastname must be 4-50 characters long");
-        }
+        }*/
         
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email",
                 "NotEmpty", "Email field is empty");

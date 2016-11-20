@@ -1,5 +1,6 @@
 package com.bugbusters.lajarus.controller;
 
+import com.bugbusters.lajarus.entity.PlayerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bugbusters.lajarus.security.JwtTokenUtil;
 import com.bugbusters.lajarus.security.JwtUser;
 import com.bugbusters.lajarus.service.JwtUserDetailsServiceImpl;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,5 +34,12 @@ public class UserController {
         JwtUser user = (JwtUser) userService.loadUserByUsername(username);
         return user;
     }
-
+    
+//    @RequestMapping(value = "players", method = RequestMethod.GET)
+//    public List<PlayerEntity> getUserPlayers(HttpServletRequest request) {
+//        String token = request.getHeader(tokenHeader);
+//        String username = jwtTokenUtil.getUsernameFromToken(token);
+//        User user = userService.findUserByUsername(username);
+//        user.
+//    }
 }

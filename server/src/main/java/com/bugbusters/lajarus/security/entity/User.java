@@ -1,8 +1,10 @@
 package com.bugbusters.lajarus.security.entity;
 
+import com.bugbusters.lajarus.entity.PlayerEntity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -62,6 +63,10 @@ public class User implements Serializable {
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID")})
     private List<Authority> authorities;
+    
+    @OneToMany(targetEntity = PlayerEntity.class, mappedBy = "user",
+            cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PlayerEntity> players;
 
     public Long getId() {
         return id;
@@ -133,5 +138,13 @@ public class User implements Serializable {
 
     public void setLastPasswordResetDate(Date lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public List<PlayerEntity> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<PlayerEntity> players) {
+        this.players = players;
     }
 }

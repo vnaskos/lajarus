@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  *
@@ -25,7 +24,7 @@ public class JwtUserDetailsServiceImplTest extends AbstractTest {
         Assert.assertEquals("failed - expected admin", "admin", user.getUsername());
     }
     
-    @Test(expected = UsernameNotFoundException.class)
+    @Test
     public void searchForInvalidUserByUsername() {
         UserDetails user = service.loadUserByUsername("asdfg");
         
