@@ -5,6 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.bugbusters.lajarus.util.HttpRequestDispatcher;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class first extends AppCompatActivity {
 
@@ -47,5 +53,41 @@ public class first extends AppCompatActivity {
         init();
         init2();
         init3();
+
+        //Perform login
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    performLogin();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+    }
+
+    private void performLogin() throws JSONException {
+        HttpRequestDispatcher requestDispatcher = new HttpRequestDispatcher();
+
+        JSONObject body = new JSONObject();
+        body.put("username", "admin");
+        body.put("password", "admin");
+        String url = "http://46.103.23.5:8080/auth/login";
+        JSONObject response = requestDispatcher.performPOST(url, body);
+
+        //Display result
+        if (response != null) {
+            final String token = response.getString("token");
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }
     }
 }
