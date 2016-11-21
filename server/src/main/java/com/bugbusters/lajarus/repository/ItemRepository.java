@@ -14,9 +14,9 @@ import org.springframework.stereotype.Repository;
 public interface ItemRepository extends JpaRepository<ItemEntity, Long>{
      @Query( "SELECT q FROM ItemEntity q WHERE q.id = :id" )
     public ItemEntity getItemById( @Param("id") long id );
+     @Query( "SELECT q FROM ItemEntity q WHERE q.type = :type" )
+    public ItemEntity getItemByType( @Param("type") String type );
     
-     /* @Query( "SELECT q FROM ItemEntity q WHERE q.type = :type" )
-    public ItemEntity getItemByType( @Param("type") String type );*/
     
     @Transactional
     @Modifying
