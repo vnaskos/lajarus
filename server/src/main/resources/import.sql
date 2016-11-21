@@ -21,3 +21,11 @@ INSERT INTO quest (id, name, latitude, longitude, description) VALUES (2, 'myQue
 
 INSERT INTO quest (id, name, latitude, longitude, description) VALUES (3, 'myQuest3', 40.20003, 45.4, 'Do something2(Description)');
 INSERT INTO quest (id, name, latitude, longitude, description) VALUES (4, 'myQuest4', 40.2, 45.4, 'Do something3(Description)');
+
+
+
+INSERT INTO item (id, name, description, type, value, price) VALUES (0, 'Shield','personal armor, meant to intercept attacks', 'Defence', 80,20);
+INSERT INTO item (id, name, description, type, value, price) VALUES (1, 'Axe', 'battle axe,is an axe specifically designed for attack', 'Attack', 90,50);
+INSERT INTO item (id, name, description, type, value, price) VALUES (2, 'Arrow', 'An arrow is a shafted projectile that is shot with a bow', 'Attack', 70,30);
+INSERT INTO item (id, name, description, type, value, price) VALUES (3, 'Elixir', 'Elixir of life,You gain Life Points (HP)', 'HP', 100,60);
+INSERT INTO item (id, name, description, type, value, price) VALUES (4, 'Energy', 'energy equipment,provide speed', 'Defence', 100,60);
