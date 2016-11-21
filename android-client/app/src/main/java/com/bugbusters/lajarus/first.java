@@ -74,7 +74,7 @@ public class first extends AppCompatActivity {
         JSONObject body = new JSONObject();
         body.put("username", "admin");
         body.put("password", "admin");
-        String url = "http://46.103.23.5:8080/auth/login";
+        String url = "http://155.254.33.123:8081/auth/login";
         JSONObject response = requestDispatcher.performPOST(url, body);
 
         //Display result
