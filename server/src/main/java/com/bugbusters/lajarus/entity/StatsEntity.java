@@ -9,31 +9,31 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "stats")
 public class StatsEntity {
-    
+
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
     private long id;
-    
+
     @Column(name = "level", nullable = false)
     private int level;
-    
+
     @Column(name = "health", nullable = false)
     private int health;
-    
+
     @Column(name = "power", nullable = false)
     private int power;
-    
+
     @Column(name = "defence", nullable = false)
     private int defence;
-    
+
     @Column(name = "speed", nullable = false)
     private int speed;
-    
+
     public StatsEntity() {
-        
+
     }
-    
+
     /**
      * @return the id
      */
@@ -118,9 +118,4 @@ public class StatsEntity {
         this.speed = speed;
     }
 
-    
-
-   
-    
 }
-
