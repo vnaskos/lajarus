@@ -1,5 +1,6 @@
 package com.bugbusters.lajarus.entity;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "item")
-public class ItemEntity {
+public class ItemEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -38,14 +39,14 @@ public class ItemEntity {
     /**
      * @return the id
      */
-    public long getId() {
+    public long getID() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setID(long id) {
         this.id = id;
     }
 
@@ -55,55 +56,59 @@ public class ItemEntity {
     public String getName() {
         return name;
     }
+    
+     public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * @param description the name to set
      */
-    public void setdescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
     /**
      * @return the description
      */
-    public String getdescription() {
+    public String getDescription() {
         return description;
     }
      /**
      * @param type the name to set
      */
-    public void settype(String type) {
+    public void setType(String type) {
         this.type = type;
     }
     /**
      * @return the type
      */
-    public String gettype() {
+    public String getType() {
         return type;
     }
      /**
      * @return the value
      */
-    public long getvalue() {
+    public long getValue() {
         return value;
     }
 
     /**
      * @param value the id to set
      */
-    public void setvalue(long value) {
+    public void setValue(long value) {
         this.value =value;
     }
      /**
      * @return the price
      */
-    public long getprice() {
+    public long getPrice() {
         return price;
     }
 
     /**
      * @param price the id to set
      */
-    public void setprice(long price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
