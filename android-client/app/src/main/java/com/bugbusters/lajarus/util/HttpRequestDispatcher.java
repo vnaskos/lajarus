@@ -17,12 +17,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class HttpRequestDispatcher {
+public final class HttpRequestDispatcher {
 
-    public HttpRequestDispatcher() {
+    private HttpRequestDispatcher() {
     }
 
-    public JSONObject performPOST(final String urlStr, final JSONObject body) {
+    public static JSONObject performPOST(final String urlStr, final JSONObject body) {
         JSONObject response = null;
 
         try {
@@ -36,7 +36,7 @@ public class HttpRequestDispatcher {
         return response;
     }
 
-    private JSONObject makeHttpPost(String urlStr, JSONObject body)
+    private static JSONObject makeHttpPost(String urlStr, JSONObject body)
             throws IOException, JSONException {
         URL url = new URL(urlStr);
 
