@@ -8,6 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bugbusters.lajarus.util.HttpRequestDispatcher;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.bugbusters.lajarus.R.id.textView2;
 
@@ -52,12 +58,12 @@ public class register extends AppCompatActivity {
         text3=textView3.getText().toString();
         textView4 = (TextView)findViewById(R.id.editText11);
         text4=textView4.getText().toString();
-        if(text1.isEmpty() || text2.isEmpty() || text3.isEmpty() || text4.isEmpty()){
-            dialog1();
-        }
-        if(!text2.equals(text3)){
-            dialog2();
-        }
+         if(text1.isEmpty() || text2.isEmpty() || text3.isEmpty() || text4.isEmpty()){
+             dialog1();
+         }
+         if(!text2.equals(text3)){
+             dialog2();
+         }
     }
 
 
@@ -66,7 +72,7 @@ public class register extends AppCompatActivity {
         but1 = (Button)findViewById(R.id.button);
         but1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                action_button();
+              action_button();
             }
         });
     }
@@ -78,4 +84,31 @@ public class register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         init_register();
     }
+
+    public void sentRegisterInfo() throws JSONException {
+        HttpRequestDispatcher requestDispatcher = new HttpRequestDispatcher();
+        JSONObject body = new JSONObject();
+        String temp_username = text1;
+        String temp_password = text2;
+        String temp_email = text4; // becouse the password is already be taken
+        body.put("username", temp_username);
+        body.put("password", temp_password);
+        body.put("email", temp_email);
+        String url = "http://46.103.23.5:8080/";
+        JSONObject response = requestDispatcher.performPOST(url, body);
+
+        //Display result
+        if (response != null) {
+            final String token = response.getString("token");
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), token, Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }
+    }
+
 }
