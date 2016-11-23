@@ -94,8 +94,8 @@ public class register extends AppCompatActivity {
         body.put("username", temp_username);
         body.put("password", temp_password);
         body.put("email", temp_email);
-        String url = "http://46.103.23.5:8080/";
-        JSONObject response = requestDispatcher.performPOST(url, body);
+       // String url = "http://46.103.23.5:8080/";
+        //JSONObject response = requestDispatcher.performPOST(url, body);
 
         //Display result
         if (response != null) {
