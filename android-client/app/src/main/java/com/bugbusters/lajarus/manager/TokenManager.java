@@ -1,4 +1,7 @@
-package com.bugbusters.lajarus.util;
+package com.bugbusters.lajarus.manager;
+
+import com.bugbusters.lajarus.util.HttpRequestDispatcher;
+import com.bugbusters.lajarus.util.Config;
 
 import org.json.JSONObject;
 
@@ -12,9 +15,7 @@ public class TokenManager {
 
     private String token;
 
-    private TokenManager() {
-
-    }
+    private TokenManager() {}
 
     public static TokenManager getInstance() {
         if(instance == null) {
@@ -24,11 +25,7 @@ public class TokenManager {
         return instance;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getToken() {
+    public String getLastProducedToken() {
         return token;
     }
 
@@ -36,7 +33,7 @@ public class TokenManager {
         JSONObject body = new JSONObject();
         body.put("username", username);
         body.put("password", password);
-        String url = "http://155.254.33.123:8081/auth/login";
+        String url = Config.getHttpURL() + "auth/login";
         JSONObject response = HttpRequestDispatcher.performPOST(url, body);
 
         if (response == null) {

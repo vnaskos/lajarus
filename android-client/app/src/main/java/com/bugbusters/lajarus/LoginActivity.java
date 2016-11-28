@@ -8,14 +8,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.bugbusters.lajarus.util.TokenManager;
+import com.bugbusters.lajarus.entity.Session;
+import com.bugbusters.lajarus.manager.SessionManager;
+import com.bugbusters.lajarus.manager.TokenManager;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private TokenManager tokenManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        tokenManager = TokenManager.getInstance();
 
         attachLoginBtnListener();
         attachRegisterBtnListener();
@@ -50,8 +56,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void run() {
             try {
-                TokenManager tokenManager = TokenManager.getInstance();
-                tokenManager.createToken(username, password);
+                String token = tokenManager.createToken(username, password);
+
+                if(token == null || token.isEmpty()) {
+                    throw new Exception("Invalid token");
+                }
+
                 handleSuccessfulLogin();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -71,7 +81,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Intent mapIntent = new Intent(LoginActivity.this, Map.class);
+        SessionManager sessionManager = SessionManager.getInstance();
+        Session s = sessionManager.createSession(tokenManager.getLastProducedToken());
+        sessionManager.setActiveSession(s);
+
+        Intent mapIntent = new Intent(LoginActivity.this, MapActivity.class);
         startActivity(mapIntent);
     }
 

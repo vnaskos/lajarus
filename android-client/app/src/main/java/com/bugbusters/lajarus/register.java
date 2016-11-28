@@ -1,7 +1,6 @@
 package com.bugbusters.lajarus;
 
 import android.content.DialogInterface;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,11 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bugbusters.lajarus.util.HttpRequestDispatcher;
+import com.bugbusters.lajarus.util.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static com.bugbusters.lajarus.R.id.textView2;
 
 public class register extends AppCompatActivity {
 
@@ -86,16 +84,14 @@ public class register extends AppCompatActivity {
     }
 
     public void sentRegisterInfo() throws JSONException {
-        HttpRequestDispatcher requestDispatcher = new HttpRequestDispatcher();
         JSONObject body = new JSONObject();
         String temp_username = text1;
         String temp_password = text2;
-        String temp_email = text4; // becouse the password is already be taken
+        String temp_email = text4;
         body.put("username", temp_username);
         body.put("password", temp_password);
         body.put("email", temp_email);
-       // String url = "http://46.103.23.5:8080/";
-        //JSONObject response = requestDispatcher.performPOST(url, body);
+        JSONObject response = HttpRequestDispatcher.performPOST(Config.getHttpURL(), body);
 
         //Display result
         if (response != null) {
