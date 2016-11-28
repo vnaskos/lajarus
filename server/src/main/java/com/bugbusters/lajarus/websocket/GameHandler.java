@@ -58,7 +58,6 @@ public class GameHandler extends TextWebSocketHandler{
         
         if(action.equals("NEARBY_PLAYERS")) {
             List<PlayerEntity> players = playerService.findPlayersNearToCurrentPlayer(from);
-            
             JSONObject response = new JSONObject();
             JSONArray jsonPlayers = new JSONArray();
             
@@ -69,10 +68,10 @@ public class GameHandler extends TextWebSocketHandler{
                 jsonPlayer.put("long", p.getLongitude());
                 jsonPlayers.put(jsonPlayer);
             });
-            
+            response.put("ACTION", "NEARBY_PLAYERS");
             response.put("players", jsonPlayers);
-            
-            session.sendMessage(new TextMessage(jsonPlayers.toString()));
+            logger.info(response.toString());
+            session.sendMessage(new TextMessage(response.toString()));
         } else if(action.equals("UPDATE_LOCATION")) {
             String latitude = request.getString("latitude");
             String longitude = request.getString("longitude");
