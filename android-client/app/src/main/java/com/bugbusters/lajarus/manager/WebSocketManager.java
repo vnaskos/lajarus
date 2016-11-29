@@ -16,11 +16,9 @@ public class WebSocketManager {
 
     private WebSocket ws;
 
-    private WebSocketManager() {
-        initWebSocket();
-    }
+    private WebSocketManager() {}
 
-    private void initWebSocket() {
+    public void initWebSocket() {
         try {
             String webSocketUri = Config.getWebSocketURL()
                     .concat("lajarus");
@@ -43,20 +41,13 @@ public class WebSocketManager {
         return ws;
     }
 
-    public void connect() {
-        if(ws == null) {
-            Log.e("Websocket", "uninitialized websocket");
-            return;
-        }
-
-        attemptConnect();
-    }
-
-    private void attemptConnect() {
+    public boolean connect() {
         try {
             ws.connect();
+            return true;
         } catch (Exception e) {
             Log.e("WebSocket Connect", e.toString());
+            return false;
         }
     }
 
