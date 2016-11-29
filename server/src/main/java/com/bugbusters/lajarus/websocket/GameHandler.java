@@ -57,7 +57,7 @@ public class GameHandler extends TextWebSocketHandler{
         String from = request.getString("FROM");
         
         if(action.equals("NEARBY_PLAYERS")) {
-            List<PlayerEntity> players = playerService.findPlayersNearToCurrentPlayer(from);
+            List<PlayerEntity> players = playerService.getNearbyPlayers(from);
             JSONObject response = new JSONObject();
             JSONArray jsonPlayers = new JSONArray();
             

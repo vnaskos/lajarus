@@ -44,7 +44,7 @@ public class PlayerServiceTest extends AbstractTest {
     
     @Test
     public void findPlayersNearToPlayerTest() throws Exception {
-        Collection<PlayerEntity> list = service.findPlayersNearToCurrentPlayer("admin");
+        Collection<PlayerEntity> list = service.getNearbyPlayers("admin");
         
         Assert.assertNotNull("failed - expected not null", list);
         Assert.assertEquals("failed - expected 2", 2, list.size());

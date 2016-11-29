@@ -32,6 +32,10 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
         return JwtUserFactory.create(user);
     }
     
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+    
     public void addNewUser(User userForm) {
         if(userForm.getEnabled() == null) {
             userForm.setEnabled(Boolean.TRUE);
