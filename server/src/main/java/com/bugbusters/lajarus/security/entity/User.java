@@ -2,6 +2,7 @@ package com.bugbusters.lajarus.security.entity;
 
 import com.bugbusters.lajarus.entity.PlayerEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -68,6 +69,15 @@ public class User implements Serializable {
             cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PlayerEntity> players;
 
+    //helper method to set roles for this user
+    public void grantURole(Authority role) {
+        if (authorities == null) {
+            authorities = new ArrayList<>();
+        }
+        authorities.add(role);
+    }
+
+    
     public Long getId() {
         return id;
     }

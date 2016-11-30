@@ -1,5 +1,6 @@
 package com.bugbusters.lajarus.service;
 
+import com.bugbusters.lajarus.repository.AuthorityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.bugbusters.lajarus.security.entity.User;
 import com.bugbusters.lajarus.security.JwtUserFactory;
 import com.bugbusters.lajarus.repository.UserRepository;
+import com.bugbusters.lajarus.security.entity.Authority;
+import com.bugbusters.lajarus.security.entity.AuthorityName;
 import java.util.Date;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -16,6 +19,8 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired AuthorityRepository authorityRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -49,6 +54,9 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
         if(userForm.getLastPasswordResetDate() == null) {
             userForm.setLastPasswordResetDate(new Date());
         }
+        
+        Authority roleUser = authorityRepository.findByName(AuthorityName.ROLE_USER);
+        userForm.grantURole(roleUser);
         userForm.setPassword(passwordEncoder.encode(userForm.getPassword()));
         userRepository.saveAndFlush(userForm);
     }
