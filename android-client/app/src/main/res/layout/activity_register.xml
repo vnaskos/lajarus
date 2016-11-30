@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.bugbusters.lajarus.register">
+    tools:context="com.bugbusters.lajarus.RegisterActivity">
 
     <EditText
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         android:layout_alignBottom="@+id/textView2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/editText8" />
+        android:id="@+id/usernameField" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -26,10 +26,9 @@
         android:inputType="textPassword"
         android:ems="10"
         android:layout_alignBottom="@+id/textView5"
-        android:layout_toEndOf="@+id/textView6"
-        android:id="@+id/editText9"
-        android:layout_alignLeft="@+id/editText10"
-        android:layout_alignStart="@+id/editText10" />
+        android:id="@+id/passwordField"
+        android:layout_alignLeft="@+id/confirmPasswordField"
+        android:layout_alignStart="@+id/confirmPasswordField" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -37,9 +36,9 @@
         android:inputType="textPassword"
         android:ems="10"
         android:layout_alignBottom="@+id/textView6"
-        android:layout_alignLeft="@+id/editText8"
-        android:layout_alignStart="@+id/editText8"
-        android:id="@+id/editText10" />
+        android:layout_alignLeft="@+id/usernameField"
+        android:layout_alignStart="@+id/usernameField"
+        android:id="@+id/confirmPasswordField" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -47,9 +46,9 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:layout_alignBottom="@+id/textView7"
-        android:layout_alignRight="@+id/editText9"
-        android:layout_alignEnd="@+id/editText9"
-        android:id="@+id/editText11" />
+        android:layout_alignRight="@+id/passwordField"
+        android:layout_alignEnd="@+id/passwordField"
+        android:id="@+id/emailField" />
 
     <TextView
         android:text="Username"
@@ -67,7 +66,7 @@
         android:text="Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
+        android:id="@+id/registerButton"
         android:layout_marginBottom="23dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
@@ -88,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
-        android:layout_above="@+id/editText10"
+        android:layout_above="@+id/confirmPasswordField"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2"
         android:layout_marginBottom="53dp" />

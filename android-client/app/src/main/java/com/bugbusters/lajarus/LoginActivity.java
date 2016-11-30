@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         Button registerBtn = (Button)findViewById(R.id.registerButton);
         registerBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Intent toy = new Intent(LoginActivity.this,register.class);
+                Intent toy = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(toy);
             }
         });

@@ -28,7 +28,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".third" />
         <activity android:name=".fourth" />
-        <activity android:name=".register" />
+        <activity android:name=".RegisterActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
