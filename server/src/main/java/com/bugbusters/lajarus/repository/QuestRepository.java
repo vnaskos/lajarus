@@ -15,13 +15,17 @@ public interface QuestRepository extends JpaRepository<QuestEntity, Long> {
 
     public QuestEntity getQuestById( @Param("id") long id );
     
-    @Query("SELECT q FROM QuestEntity q "
-            + "WHERE acos(sin(:latitude) * sin(q.latitude) + cos(:latitude) * "
-            + "cos(q.latitude) * cos(q.longitude - (:longitude))) * 6371 <= :radius")
+    @Query("SELECT q FROM QuestEntity q"
+            + " WHERE 6371 * acos(cos(radians(:latitude))"
+            + " * cos(radians(q.latitude))"
+            + " * cos(radians(q.longitude)"
+            + " - radians(:longitude))"
+            + " + sin(radians(:latitude))"
+            + " * sin(radians(q.latitude))) <= :distance")
     public List<QuestEntity> findNearByQuests(
             @Param("latitude") double latatitude,
             @Param("longitude") double longitude,
-            @Param("radius") double radius);
+            @Param("distance") double radius);
     
     @Transactional
     @Modifying

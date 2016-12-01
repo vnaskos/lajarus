@@ -17,13 +17,17 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Long> {
     
     public PlayerEntity findPlayerByName(@Param("name") String name);
     
-    @Query("SELECT p FROM PlayerEntity p "
-            + "WHERE acos(sin(:latitude) * sin(p.latitude) + cos(:latitude) * "
-            + "cos(p.latitude) * cos(p.longitude - (:longitude))) * 6371 <= :radius")
+    @Query("SELECT p FROM PlayerEntity p"
+            + " WHERE 6371 * acos(cos(radians(:latitude))"
+            + " * cos(radians(p.latitude))"
+            + " * cos(radians(p.longitude)"
+            + " - radians(:longitude))"
+            + " + sin(radians(:latitude))"
+            + " * sin(radians(p.latitude))) <= :distance")
     public List<PlayerEntity> findNearByPlayers(
             @Param("latitude") double latatitude,
             @Param("longitude") double longitude,
-            @Param("radius") double radius);
+            @Param("distance") double radius);
     
     @Transactional
     @Modifying(clearAutomatically = true)
