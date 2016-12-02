@@ -51,7 +51,7 @@ public class QuestService {
     public List<QuestEntity> getNearbyQuests(String name) {
         PlayerEntity player = playerRepository.findPlayerByName(name);
         List<QuestEntity> nearbyQuests = questRepository.findNearByQuests(
-                player.getLatitude(), player.getLongitude(), 200);
+                player.getLatitude(), player.getLongitude(), 0.2);
         return nearbyQuests;
     }
 }

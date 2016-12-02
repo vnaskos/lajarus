@@ -53,8 +53,8 @@ public class PlayerService {
                     String.format("Player %s was not found!", name));
         }
         
-        List<PlayerEntity> nearbyPlayers= playerRepository.findNearByPlayers(
-                player.getLatitude(), player.getLongitude(), 200);
+        List<PlayerEntity> nearbyPlayers = playerRepository.findNearByPlayers(
+                player.getLatitude(), player.getLongitude(), 0.2);
         
         return nearbyPlayers;
     }

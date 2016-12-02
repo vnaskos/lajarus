@@ -18,7 +18,7 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Long> {
     public PlayerEntity findPlayerByName(@Param("name") String name);
     
     @Query("SELECT p FROM PlayerEntity p"
-            + "WHERE ( 6371 * acos( cos( radians( :latitude ) )"
+            + " WHERE ( 6371 * acos( cos( radians( :latitude ) )"
             + " * cos( radians( p.latitude ) )"
             + " * cos( radians( p.longitude ) - radians( :longitude ) )"
             + " + sin( radians( :latitude ) )"
