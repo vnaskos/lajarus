@@ -33,15 +33,8 @@ public class QuestService {
         return questRepository.findAll();
     }
 
-    public void createQuest(String name, double latitude, double longitude,
-            String description) {
-        QuestEntity questEntity = new QuestEntity();
-        questEntity.setLatitude(latitude);
-        questEntity.setLongitude(longitude);
-        questEntity.setName(name);
-        questEntity.setDescription(description);
+    public void createQuest(QuestEntity questEntity) {
         questRepository.saveAndFlush(questEntity);
-
     }
 
     public void deleteQuest(long id) {
@@ -53,5 +46,16 @@ public class QuestService {
         List<QuestEntity> nearbyQuests = questRepository.findNearByQuests(
                 player.getLatitude(), player.getLongitude(), 200);
         return nearbyQuests;
+    }
+    
+    public boolean isThereQuestByName( String name )
+    {
+        QuestEntity questEntity = questRepository.isThereQuestByName( name );
+        if ( questEntity == null )
+        {
+            return false;
+        }
+        else
+            return true;
     }
 }

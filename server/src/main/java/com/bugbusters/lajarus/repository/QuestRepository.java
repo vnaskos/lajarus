@@ -32,5 +32,7 @@ public interface QuestRepository extends JpaRepository<QuestEntity, Long> {
     @Query( "DELETE from QuestEntity q WHERE q.id = :id" )
     public void deleteQuest( @Param("id") long id );
     
+    @Query("SELECT q FROM QuestEntity q WHERE q.name = :name")
+    public QuestEntity isThereQuestByName( @Param("name") String name );
     
 }

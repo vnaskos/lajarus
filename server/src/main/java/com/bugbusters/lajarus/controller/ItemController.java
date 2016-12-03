@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bugbusters.lajarus.entity.ItemEntity;
 import com.bugbusters.lajarus.service.ItemService;
+import com.bugbusters.lajarus.validation.ItemValidator;
+import com.bugbusters.lajarus.validation.ValidationErrorBuilder;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -16,11 +22,13 @@ import com.bugbusters.lajarus.service.ItemService;
 @RequestMapping(value = "/item")
 public class ItemController {
     
-    
-    private final ItemService itemService;
-    
-   
      @Autowired
+    private ItemService itemService;
+    
+     
+     @Autowired
+     private ItemValidator itemValidator;
+             
     public ItemController( ItemService itemService ) 
     {
         this.itemService = itemService;
@@ -41,10 +49,19 @@ public class ItemController {
     }
     
     
-     @RequestMapping(value = "/create/id/{id}/name/{name}/description/{description}/type/{type}/value/{value}/price/{price}", method = RequestMethod.POST)
-    public void createQuest( @PathVariable long id, @PathVariable String name, @PathVariable String description, @PathVariable String type, @PathVariable long value, @PathVariable long price ) throws Exception
+    // @RequestMapping(value = "/create/id/{id}/name/{name}/description/{description}/type/{type}/value/{value}/price/{price}", method = RequestMethod.POST)
+    @RequestMapping(value = "/create, method = RequestMethod.POST")
+    public ResponseEntity<?> createQuest(@RequestBody ItemEntity itemEntity, Errors errors) throws Exception
     {
-        itemService.createItem(id, name,description, type, value, price);
+        itemValidator.validate( itemEntity , errors);
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest()
+                    .body(ValidationErrorBuilder
+                            .fromBindingErrors(errors));
+        }
+        
+        itemService.createItem(itemEntity);
+        return ResponseEntity.ok(itemEntity);
     }
     
     

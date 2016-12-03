@@ -44,19 +44,9 @@ public class ItemService {
     }
      
     
-       public void createItem( long id, String name, String description, String type, long value, long price )
+       public void createItem( ItemEntity itemEntity )
     {
-       
-        ItemEntity itemEntity = new ItemEntity();
-    
-        itemEntity.setID(id);
-        itemEntity.setName(name);
-        itemEntity.setDescription(description);
-        itemEntity.setType(type);
-        itemEntity.setValue(value);
-        itemEntity.setPrice(price);
-        itemRepository.saveAndFlush( itemEntity );
-        
+       itemRepository.saveAndFlush( itemEntity );
     }
  
          public void deleteItem( long id )
@@ -64,6 +54,18 @@ public class ItemService {
         long tmp_id;
         tmp_id = id;
         itemRepository.deleteItem( tmp_id );
+    }
+         
+    public boolean isThereItemtByName( String name )
+    {
+        ItemEntity itemEntity = itemRepository.isThereItemByName( name );
+        
+        if ( itemEntity == null )
+        {
+            return false;
+        }
+        else
+            return true;
     }
        
 }

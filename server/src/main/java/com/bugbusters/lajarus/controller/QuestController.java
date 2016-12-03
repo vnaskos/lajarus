@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bugbusters.lajarus.entity.QuestEntity;
 import com.bugbusters.lajarus.service.QuestService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import com.bugbusters.lajarus.validation.QuestValidator;
+import com.bugbusters.lajarus.validation.ValidationErrorBuilder;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
 @RestController
 @RequestMapping(value = "/quest")
@@ -17,6 +24,9 @@ public class QuestController {
 
     @Autowired
     private QuestService questService;
+    
+    @Autowired
+    private QuestValidator questValidator;
 
     @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     public QuestEntity getQuestById(@PathVariable long id) throws Exception {
@@ -33,9 +43,17 @@ public class QuestController {
         return questService.getAll();
     }
 
-    @RequestMapping(value = "/create/name/{name}/location/{latitude}/{longitude}/description/{description}", method = RequestMethod.POST)
-    public void createQuest(@PathVariable String name, @PathVariable long latitude, @PathVariable long longitude, @PathVariable String description) throws Exception {
-        questService.createQuest(name, latitude, longitude, description);
+    //@RequestMapping(value = "/create/name/{name}/location/{latitude}/{longitude}/description/{description}", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<?> createQuest(@RequestBody QuestEntity questEntity, Errors errors) throws Exception {
+        questValidator.validate(questEntity, errors);
+        if (errors.hasErrors()) {
+            return ResponseEntity.badRequest()
+                    .body(ValidationErrorBuilder
+                            .fromBindingErrors(errors));
+        }
+        questService.createQuest(questEntity);
+        return ResponseEntity.ok(questEntity);
     }
 
     @RequestMapping(value = "/delete/id/{id}", method = RequestMethod.POST)
