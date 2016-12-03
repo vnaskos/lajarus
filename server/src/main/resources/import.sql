@@ -10,8 +10,8 @@ INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (1, 2);
 INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (2, 1);
 INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (3, 1);
 
-INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (1, 'admin', 40.2, 45.4, 1);
-INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (2, 'user1', 40.2003, 45.4, 2);
+INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (1, 'admin', 41.076804, 23.553638, 1);
+INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (2, 'user1', 41.075833, 23.553614, 2);
 INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (3, 'giorgis', 40.1, 44.7, 3);
 INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (4, 'yoko', 42.3, 45.2, 3);
 
