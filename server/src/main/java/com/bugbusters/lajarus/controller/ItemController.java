@@ -11,7 +11,6 @@ import com.bugbusters.lajarus.entity.ItemEntity;
 import com.bugbusters.lajarus.service.ItemService;
 import com.bugbusters.lajarus.validation.ItemValidator;
 import com.bugbusters.lajarus.validation.ValidationErrorBuilder;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,16 +23,14 @@ public class ItemController {
     
      @Autowired
     private ItemService itemService;
-    
      
-     @Autowired
-     private ItemValidator itemValidator;
-             
+    @Autowired
+    private ItemValidator itemValidator;
+     
     public ItemController( ItemService itemService ) 
     {
         this.itemService = itemService;
     }
-    
     
      @RequestMapping( value = "/id/{id}", method = RequestMethod.GET )
     public ItemEntity getItemById( @PathVariable long id ) throws Exception
@@ -50,8 +47,8 @@ public class ItemController {
     
     
     // @RequestMapping(value = "/create/id/{id}/name/{name}/description/{description}/type/{type}/value/{value}/price/{price}", method = RequestMethod.POST)
-    @RequestMapping(value = "/create, method = RequestMethod.POST")
-    public ResponseEntity<?> createQuest(@RequestBody ItemEntity itemEntity, Errors errors) throws Exception
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<?> createItem(@RequestBody ItemEntity itemEntity, Errors errors) throws Exception
     {
         itemValidator.validate( itemEntity , errors);
         if (errors.hasErrors()) {

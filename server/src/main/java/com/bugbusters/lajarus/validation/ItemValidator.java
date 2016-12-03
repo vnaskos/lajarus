@@ -8,6 +8,7 @@ package com.bugbusters.lajarus.validation;
 import com.bugbusters.lajarus.entity.ItemEntity;
 import com.bugbusters.lajarus.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -16,6 +17,7 @@ import org.springframework.validation.Validator;
  *
  * @author Karen
  */
+@Component
 public class ItemValidator implements Validator {
 
     @Autowired
