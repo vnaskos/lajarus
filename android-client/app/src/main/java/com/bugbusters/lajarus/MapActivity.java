@@ -12,6 +12,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bugbusters.lajarus.entity.Session;
@@ -59,11 +61,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
         SupportMapFragment mapFrag = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
-
+        ProgressBar xp = (ProgressBar) findViewById(R.id.progressBar9);
+        xp.setProgress(50);
         WebSocketMessageListener wsListener = new WebSocketMessageListener() {
             @Override
             public void onMessage(JSONObject msg) throws JSONException {
