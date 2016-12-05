@@ -53,12 +53,12 @@ public class first extends AppCompatActivity {
         init3();
         mySound=MediaPlayer.create(this,R.raw.musictheme);
 
-
+        playMusic();
 
     }
 
 
-    public void playMusic(View view) {
+    public void playMusic() {
         mySound.start();
     }
 }
