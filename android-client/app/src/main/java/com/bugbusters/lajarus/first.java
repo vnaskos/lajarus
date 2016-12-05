@@ -61,4 +61,14 @@ public class first extends AppCompatActivity {
     public void playMusic() {
         mySound.start();
     }
+
+
+    protected void onPause(){
+        super.onPause();
+        mySound.release();
+    }
+
+    public void stopMusic(View view) {
+        mySound.stop();
+    }
 }
