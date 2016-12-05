@@ -54,6 +54,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     private Session session;
     private Map<String, Marker> playerMarkers;
+    private Map<String, Marker> questMarkers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                     JSONArray players = msg.getJSONArray("players");
                     updatePlayerPositionsOnMap(players);
                 }
+
+                if(action.equals("NEARBY_QUESTS")) {
+                    JSONArray quests = msg.getJSONArray("quests");
+                    updateQuestPositionsOnMap(quests);
+                }
             }
         };
 
@@ -84,6 +90,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         session = SessionManager.getInstance().getActiveSession();
         playerMarkers = new HashMap<>();
+        questMarkers = new HashMap<>();
     }
 
     @Override
@@ -192,6 +199,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         try {
             JSONObject updateLocationRequest = new JSONObject();
             updateLocationRequest.put("ACTION", "NEARBY_PLAYERS");
+            updateLocationRequest.put("FROM", session.getActivePlayer().getName());
+            request = updateLocationRequest.toString();
+        } catch (Exception e) {
+            Log.e("MapActivity", "websocket update location " + e.getCause());
+        }
+
+        new AsyncWebSocketMessageSender().execute(request);
+
+        try {
+            JSONObject updateLocationRequest = new JSONObject();
+            updateLocationRequest.put("ACTION", "NEARBY_QUESTS");
             updateLocationRequest.put("FROM", session.getActivePlayer().getName());
             request = updateLocationRequest.toString();
         } catch (Exception e) {
@@ -317,6 +335,49 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                     markerOptions.icon(BitmapDescriptorFactory.fromResource(R.raw.player_marker));
                     Marker m = mGoogleMap.addMarker(markerOptions);
                     playerMarkers.put(name, m);
+                }
+            }
+        });
+    }
+
+    private void updateQuestPositionsOnMap(JSONArray quests) throws JSONException {
+        final Map<String, LatLng> nearbyQuests = new HashMap<>();
+
+        //Parse JSON Array elements to Map key:name val:location
+        for(int i=0;i<quests.length();i++) {
+            JSONObject quest = quests.getJSONObject(i);
+            final String name = quest.getString("name");
+            Double latitude = quest.getDouble("lat");
+            Double longitude = quest.getDouble("long");
+            final LatLng latLng = new LatLng(latitude, longitude);
+
+            nearbyQuests.put(name, latLng);
+        }
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                //delete quests in case they disappear
+                for(String name : questMarkers.keySet()) {
+                    Marker m = questMarkers.get(name);
+
+                    if(nearbyQuests.get(name) != null) {
+                        nearbyQuests.remove(name);
+                    } else {
+                        m.remove();
+                        questMarkers.remove(name);
+                    }
+                }
+
+                //Add new visible quest
+                for(String name : nearbyQuests.keySet()) {
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(nearbyQuests.get(name));
+                    markerOptions.title("Quest: " + name);
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    Marker m = mGoogleMap.addMarker(markerOptions);
+                    questMarkers.put(name, m);
                 }
             }
         });
