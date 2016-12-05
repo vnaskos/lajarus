@@ -1,7 +1,9 @@
 package com.bugbusters.lajarus.websocket;
 
 import com.bugbusters.lajarus.entity.PlayerEntity;
+import com.bugbusters.lajarus.entity.QuestEntity;
 import com.bugbusters.lajarus.service.PlayerService;
+import com.bugbusters.lajarus.service.QuestService;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -31,6 +33,9 @@ public class GameHandler extends TextWebSocketHandler{
     @Autowired
     private PlayerService playerService;
     
+    @Autowired
+    private QuestService questService;
+    
     @Override
     public void handleTransportError(WebSocketSession session, Throwable throwable) throws Exception {
         logger.error("error occured at sender " + session, throwable);
@@ -56,26 +61,22 @@ public class GameHandler extends TextWebSocketHandler{
         String action = request.getString("ACTION");
         String from = request.getString("FROM");
         
-        if(action.equals("NEARBY_PLAYERS")) {
-            List<PlayerEntity> players = playerService.getNearbyPlayers(from);
-            JSONObject response = new JSONObject();
-            JSONArray jsonPlayers = new JSONArray();
-            
-            players.forEach(p -> {
-                JSONObject jsonPlayer = new JSONObject();
-                jsonPlayer.put("name", p.getName());
-                jsonPlayer.put("lat", p.getLatitude());
-                jsonPlayer.put("long", p.getLongitude());
-                jsonPlayers.put(jsonPlayer);
-            });
-            response.put("ACTION", "NEARBY_PLAYERS");
-            response.put("players", jsonPlayers);
-            logger.info(response.toString());
-            session.sendMessage(new TextMessage(response.toString()));
-        } else if(action.equals("UPDATE_LOCATION")) {
-            String latitude = request.getString("latitude");
-            String longitude = request.getString("longitude");
-            playerService.updatePlayerLocation(from, latitude, longitude);
+        switch (action) {
+            case "NEARBY_PLAYERS":
+                String players = getNearbyPlayers(from);
+                session.sendMessage(new TextMessage(players));
+                break;
+            case "NEARBY_QUESTS":
+                String quests = getNearbyQuests(from);
+                session.sendMessage(new TextMessage(quests));
+                break;
+            case "UPDATE_LOCATION":
+                String latitude = request.getString("latitude");
+                String longitude = request.getString("longitude");
+                playerService.updatePlayerLocation(from, latitude, longitude);
+                break;
+            default:
+                break;
         }
     }
 
@@ -87,6 +88,49 @@ public class GameHandler extends TextWebSocketHandler{
                 java.util.logging.Logger.getLogger(GameHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+    }
+    
+    private String getNearbyPlayers(String from) {
+        List<PlayerEntity> players = playerService.getNearbyPlayers(from);
+        
+        JSONObject response = new JSONObject();
+        JSONArray jsonPlayers = new JSONArray();
+        
+        players.forEach(p -> {
+            JSONObject jsonPlayer = new JSONObject();
+            jsonPlayer.put("name", p.getName());
+            jsonPlayer.put("lat", p.getLatitude());
+            jsonPlayer.put("long", p.getLongitude());
+            jsonPlayers.put(jsonPlayer);
+        });
+        
+        response.put("ACTION", "NEARBY_PLAYERS");
+        response.put("players", jsonPlayers);
+        logger.info(response.toString());
+        
+        return response.toString();
+    }
+    
+    private String getNearbyQuests(String from) {
+        List<QuestEntity> quests = questService.getNearbyQuests(from);
+        
+        JSONObject response = new JSONObject();
+        JSONArray jsonPlayers = new JSONArray();
+        
+        quests.forEach(q -> {
+            JSONObject jsonQuest = new JSONObject();
+            jsonQuest.put("name", q.getName());
+            jsonQuest.put("desc", q.getDescription());
+            jsonQuest.put("lat", q.getLatitude());
+            jsonQuest.put("long", q.getLongitude());
+            jsonPlayers.put(jsonQuest);
+        });
+        
+        response.put("ACTION", "NEARBY_QUESTS");
+        response.put("quests", jsonPlayers);
+        logger.info(response.toString());
+        
+        return response.toString();
     }
     
 }

@@ -15,7 +15,7 @@ INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (2, 'user1', 
 INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (3, 'giorgis', 40.1, 44.7, 3);
 INSERT INTO player (id, name, latitude, longitude, user_id) VALUES (4, 'yoko', 42.3, 45.2, 3);
 
-INSERT INTO quest (id, name, latitude, longitude, description) VALUES (1, 'myQuest1', 40.3, 45.4, 'Do something1(Description)');
+INSERT INTO quest (id, name, latitude, longitude, description) VALUES (1, 'myQuest1', 41.076802, 23.553636, 'Do something1(Description)');
 INSERT INTO quest (id, name, latitude, longitude, description) VALUES (2, 'myQuest2', 40.2002, 45.4002, 'Do something2(Description)');
 INSERT INTO quest (id, name, latitude, longitude, description) VALUES (3, 'myQuest3', 40.9, 45.7, 'Do something3(Description)');
 INSERT INTO quest (id, name, latitude, longitude, description) VALUES (4, 'myQuest3', 40.20003, 45.4, 'Do something2(Description)');
