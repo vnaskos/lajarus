@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bugbusters.lajarus.entity.PlayerEntity;
+import com.bugbusters.lajarus.model.PlayerItemForm;
 import com.bugbusters.lajarus.security.JwtTokenUtil;
 import com.bugbusters.lajarus.service.PlayerService;
 import javax.servlet.http.HttpServletRequest;
@@ -80,5 +81,17 @@ public class PlayerController {
         String token = request.getHeader(tokenHeader);
         String username = jwtTokenUtil.getUsernameFromToken(token);
         playerService.createPlayerForUser(playerEntity, username);
+    }
+    
+    @RequestMapping(value = "/addItem", method = RequestMethod.PUT)
+    public void addItem(HttpServletRequest request,
+            @RequestBody PlayerItemForm playerItem) {
+        playerService.addItem(playerItem.getPlayerId(), playerItem.getItemId());
+    }
+    
+    @RequestMapping(value = "/removeItem", method = RequestMethod.DELETE)
+    public void removeItem(HttpServletRequest request,
+            @RequestBody PlayerItemForm playerItem) {
+        playerService.removeItem(playerItem.getPlayerId(), playerItem.getItemId());
     }
 }

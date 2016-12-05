@@ -1,10 +1,15 @@
 package com.bugbusters.lajarus.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -13,7 +18,6 @@ public class ItemEntity implements Serializable {
 
     @Id
     @GeneratedValue
-
     @Column(name = "id", nullable = false)
     private long id;
     
@@ -31,6 +35,10 @@ public class ItemEntity implements Serializable {
     
     @Column(name = "price", nullable = false)
     private long price;
+    
+    @JsonIgnore
+    @ManyToMany(mappedBy = "inventory", fetch = FetchType.LAZY)
+    private Set<PlayerEntity> players;
     
     public ItemEntity() {
         
@@ -112,6 +120,12 @@ public class ItemEntity implements Serializable {
         this.price = price;
     }
 
+    public Set<PlayerEntity> getPlayers() {
+        return players;
+    }
 
+    public void setPlayers(Set<PlayerEntity> players) {
+        this.players = players;
+    }
     
 }

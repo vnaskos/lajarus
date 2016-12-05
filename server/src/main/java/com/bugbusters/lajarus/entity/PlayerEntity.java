@@ -2,6 +2,8 @@ package com.bugbusters.lajarus.entity;
 
 import com.bugbusters.lajarus.security.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,12 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "player")
-public class PlayerEntity {
+public class PlayerEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -34,6 +37,13 @@ public class PlayerEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "player_item",
+            joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")})
+    private Set<ItemEntity> inventory;
     
     public PlayerEntity() {
 
@@ -78,6 +88,12 @@ public class PlayerEntity {
     public void setUser(User user) {
         this.user = user;
     }
-    
-    
+
+    public Set<ItemEntity> getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Set<ItemEntity> inventory) {
+        this.inventory = inventory;
+    }
 }

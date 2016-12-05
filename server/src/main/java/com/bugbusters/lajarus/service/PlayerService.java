@@ -1,11 +1,13 @@
 package com.bugbusters.lajarus.service;
 
+import com.bugbusters.lajarus.entity.ItemEntity;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bugbusters.lajarus.entity.PlayerEntity;
+import com.bugbusters.lajarus.repository.ItemRepository;
 import com.bugbusters.lajarus.repository.PlayerRepository;
 import com.bugbusters.lajarus.security.entity.User;
 import javax.persistence.NoResultException;
@@ -15,6 +17,9 @@ public class PlayerService {
     
     @Autowired
     private PlayerRepository playerRepository;
+    
+    @Autowired
+    private ItemRepository itemRepository;
     
     @Autowired
     private JwtUserDetailsServiceImpl userService;
@@ -71,5 +76,19 @@ public class PlayerService {
         playerEntity.setUser(u);
         PlayerEntity player = playerRepository.saveAndFlush(playerEntity);
         System.out.println("Player id " + player.getId());
+    }
+    
+    public void addItem(long playerId, long itemId) {
+        PlayerEntity playerEntity = playerRepository.findPlayerById(playerId);
+        ItemEntity itemEntity = itemRepository.getItemById(itemId);
+        playerEntity.getInventory().add(itemEntity);
+        playerRepository.saveAndFlush(playerEntity);
+    }
+    
+    public void removeItem(long playerId, long itemId) {
+        PlayerEntity playerEntity = playerRepository.findPlayerById(playerId);
+        ItemEntity itemEntity = itemRepository.getItemById(itemId);
+        playerEntity.getInventory().remove(itemEntity);
+        playerRepository.saveAndFlush(playerEntity);
     }
 }
