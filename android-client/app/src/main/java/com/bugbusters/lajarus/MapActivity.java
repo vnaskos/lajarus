@@ -3,6 +3,7 @@ package com.bugbusters.lajarus;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -57,6 +59,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private Session session;
     private Map<String, Marker> playerMarkers;
     private Map<String, Marker> questMarkers;
+    public Button but1;
+
+    public void init(){
+        but1 = (Button)findViewById(R.id.button4);
+        but1.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Intent toy = new Intent(MapActivity.this,items.class);
+                startActivity(toy);
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +80,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         mapFrag.getMapAsync(this);
         ProgressBar xp = (ProgressBar) findViewById(R.id.progressBar9);
         xp.setProgress(50);
+        init();
         WebSocketMessageListener wsListener = new WebSocketMessageListener() {
             @Override
             public void onMessage(JSONObject msg) throws JSONException {
