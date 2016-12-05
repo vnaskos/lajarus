@@ -1,5 +1,5 @@
 
-package com.bugbusters.lajarus.service;
+package com.bugbusters.lajarus.config;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

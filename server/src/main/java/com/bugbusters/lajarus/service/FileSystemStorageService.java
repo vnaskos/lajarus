@@ -1,6 +1,7 @@
 
 package com.bugbusters.lajarus.service;
 
+import com.bugbusters.lajarus.config.StorageProperties;
 import com.bugbusters.lajarus.exception.StorageFileNotFoundException;
 import com.bugbusters.lajarus.exception.StorageException;
 import org.springframework.beans.factory.annotation.Autowired;
