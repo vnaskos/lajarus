@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bugbusters.lajarus.entity.PlayerEntity;
 import com.bugbusters.lajarus.model.PlayerItemForm;
+import com.bugbusters.lajarus.model.PlayerOnlineForm;
 import com.bugbusters.lajarus.security.JwtTokenUtil;
 import com.bugbusters.lajarus.service.PlayerService;
 import javax.servlet.http.HttpServletRequest;
@@ -96,9 +97,9 @@ public class PlayerController {
         playerService.removeItem(playerItem.getPlayerId(), playerItem.getItemId());
     }
     
-    
-@RequestMapping(value = "/Active/{value}",method = RequestMethod.PUT)
-    public void setActive(HttpServletRequest request, @RequestParam boolean value) {
-	playerService.setActive(value);
+    @RequestMapping(value = "/online", method = RequestMethod.PUT)
+    public void setOnline(HttpServletRequest request,
+            @RequestBody PlayerOnlineForm playerOnline) {
+	playerService.setOnline(playerOnline.isOnline(), playerOnline.getPlayerId());
     }
 }

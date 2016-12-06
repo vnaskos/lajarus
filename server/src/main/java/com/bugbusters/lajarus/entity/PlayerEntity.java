@@ -33,8 +33,8 @@ public class PlayerEntity implements Serializable {
     @Column(name = "longitude", nullable = false)
     private double longitude;
     
-    @Column(name = "avtive", nullable = false)
-    private boolean active;
+    @Column(name = "online", nullable = false)
+    private boolean online;
 
     @JsonIgnore
     @ManyToOne
@@ -84,12 +84,12 @@ public class PlayerEntity implements Serializable {
         this.longitude = longitude;
     }
     
-    public boolean getActive() {
-        return active;
+    public boolean isOnline() {
+        return online;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setOnline(boolean active) {
+        this.online = active;
     }
 
     public User getUser() {
