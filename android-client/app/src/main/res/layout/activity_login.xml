@@ -9,10 +9,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.bugbusters.lajarus.LoginActivity">
+    tools:context="com.bugbusters.lajarus.LoginActivity"
+    android:background="@drawable/mainbackground">
 
     <TextView
-        android:text="@string/login_label"
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
@@ -36,37 +37,27 @@
         android:hint="@string/password"
         android:id="@+id/passwordField" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="50dp"
-        android:id="@+id/login_actions" >
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
-        <TextView
-            android:text="@string/no_account_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/registerButton"
-            android:text="@string/register_btn"
-            android:background="@drawable/button_style"/>
 
         <Button
             android:text="@string/login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="60dp"
             android:id="@+id/loginButton"
+            android:background="@drawable/button_style"
             />
-    </LinearLayout>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:id="@+id/registerButton"
+        android:text="@string/register_btn"
+        android:background="@drawable/button_style"/>
+
 
 </LinearLayout>
