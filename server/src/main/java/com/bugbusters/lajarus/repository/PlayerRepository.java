@@ -32,5 +32,9 @@ public interface PlayerRepository extends JpaRepository<PlayerEntity, Long> {
     @Modifying(clearAutomatically = true)
     @Query( "UPDATE PlayerEntity p SET p.latitude =:latitude, p.longitude =:longitude WHERE p.name =:name" )
     public void updatePlayerLocation( @Param("name") String name,@Param("latitude") double latitude,@Param("longitude") double longitude );
+
+    public PlayerEntity findPlayerByActive(boolean playerActive);
+
+    public PlayerEntity setActive(boolean b);
     
 }
