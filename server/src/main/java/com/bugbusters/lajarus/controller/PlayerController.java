@@ -19,6 +19,7 @@ import org.jsondoc.core.annotation.ApiMethod;
 import org.jsondoc.core.annotation.ApiPathParam;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping(value = "/player")
@@ -93,5 +94,11 @@ public class PlayerController {
     public void removeItem(HttpServletRequest request,
             @RequestBody PlayerItemForm playerItem) {
         playerService.removeItem(playerItem.getPlayerId(), playerItem.getItemId());
+    }
+    
+    
+@RequestMapping(value = "/Active/{value}",method = RequestMethod.PUT)
+    public void setActive(HttpServletRequest request, @RequestParam boolean value) {
+	playerService.setActive(value);
     }
 }

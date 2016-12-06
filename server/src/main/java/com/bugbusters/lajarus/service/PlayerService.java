@@ -91,4 +91,13 @@ public class PlayerService {
         playerEntity.getInventory().remove(itemEntity);
         playerRepository.saveAndFlush(playerEntity);
     }
+    
+    public void setActive(boolean playerActive) {
+        
+       PlayerEntity playerEntity = playerRepository.findPlayerByActive(playerActive);
+        PlayerEntity  PlayerEntity  = playerRepository.setActive(true);
+         playerRepository.save(PlayerEntity);
+    }
+
+    
 }
