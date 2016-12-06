@@ -58,13 +58,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/registerButton"
-            android:text="@string/register_btn" />
+            android:text="@string/register_btn"
+            android:background="@drawable/button_style"/>
 
         <Button
             android:text="@string/login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/loginButton" />
+            android:id="@+id/loginButton"
+            />
     </LinearLayout>
 
 </LinearLayout>

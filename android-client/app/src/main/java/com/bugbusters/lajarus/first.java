@@ -1,18 +1,18 @@
 package com.bugbusters.lajarus;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class first extends AppCompatActivity {
 
-    MediaPlayer mySound;
+    TextView t;
+
    public Button but1;
-
-
 
     public void init(){
         but1 = (Button)findViewById(R.id.button6);
@@ -51,24 +51,19 @@ public class first extends AppCompatActivity {
         init();
         init2();
         init3();
-        mySound=MediaPlayer.create(this,R.raw.musictheme);
 
-        playMusic();
+        t= (TextView) findViewById(R.id.button6);
+        Typeface myCustomFont= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
+        t.setTypeface(myCustomFont);
 
+        t= (TextView) findViewById(R.id.button7);
+        Typeface myCustomFont1= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
+        t.setTypeface(myCustomFont1);
+
+        t= (TextView) findViewById(R.id.button8);
+        Typeface myCustomFont2= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
+        t.setTypeface(myCustomFont2);
     }
 
 
-    public void playMusic() {
-        mySound.start();
-    }
-
-
-    protected void onPause(){
-        super.onPause();
-        mySound.release();
-    }
-
-    public void stopMusic(View view) {
-        mySound.stop();
-    }
 }
