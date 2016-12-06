@@ -23,6 +23,7 @@ public class first extends AppCompatActivity {
             public void onClick(View view) {
                 Intent toy = new Intent(first.this, LoginActivity.class);
                 startActivity(toy);
+
             }
         });
     }
