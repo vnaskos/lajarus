@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         attachRegisterBtnListener();
 
 
-        t= (TextView) findViewById(R.id.loginButton);
+       /* t= (TextView) findViewById(R.id.loginButton);
         Typeface myCustomFont= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
         t.setTypeface(myCustomFont);
 
@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         t= (TextView) findViewById(R.id.loginLabel);
         Typeface myCustomFont4= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
         t.setTypeface(myCustomFont4);
-
+    */
 
 
     }
