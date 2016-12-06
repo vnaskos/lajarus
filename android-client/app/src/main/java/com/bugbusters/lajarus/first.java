@@ -52,7 +52,7 @@ public class first extends AppCompatActivity {
         init2();
         init3();
 
-        t= (TextView) findViewById(R.id.button6);
+        /*t= (TextView) findViewById(R.id.button6);
         Typeface myCustomFont= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
         t.setTypeface(myCustomFont);
 
@@ -62,7 +62,7 @@ public class first extends AppCompatActivity {
 
         t= (TextView) findViewById(R.id.button8);
         Typeface myCustomFont2= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
-        t.setTypeface(myCustomFont2);
+        t.setTypeface(myCustomFont2);*/
     }
 
 
