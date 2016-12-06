@@ -6,39 +6,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.media.MediaPlayer;
 
 public class first extends AppCompatActivity {
 
     TextView t;
 
-   public Button but1;
+    public Button but1;
+    MediaPlayer mySound;
 
-    public void init(){
-        but1 = (Button)findViewById(R.id.button6);
-        but1.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                Intent toy = new Intent(first.this,LoginActivity.class);
+    public void init() {
+        but1 = (Button) findViewById(R.id.button6);
+        but1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent toy = new Intent(first.this, LoginActivity.class);
                 startActivity(toy);
             }
         });
     }
 
-    public void init2(){
-        but1 = (Button)findViewById(R.id.button7);
-        but1.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                Intent toy2 = new Intent(first.this,third.class);
+    public void init2() {
+        but1 = (Button) findViewById(R.id.button7);
+        but1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent toy2 = new Intent(first.this, third.class);
                 startActivity(toy2);
             }
         });
     }
 
-    public void init3(){
-        but1 = (Button)findViewById(R.id.button8);
-        but1.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                Intent toy3 = new Intent(first.this,fourth.class);
+    public void init3() {
+        but1 = (Button) findViewById(R.id.button8);
+        but1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent toy3 = new Intent(first.this, fourth.class);
                 startActivity(toy3);
             }
         });
@@ -51,6 +54,11 @@ public class first extends AppCompatActivity {
         init();
         init2();
         init3();
+        mySound = MediaPlayer.create(this,R.raw.musictheme);
+
+        mySound.setLooping(true);
+
+
 
         /*t= (TextView) findViewById(R.id.button6);
         Typeface myCustomFont= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
@@ -66,4 +74,23 @@ public class first extends AppCompatActivity {
     }
 
 
+    public void playMusic(View view) {
+        mySound.start();
+    }
+
+    protected void onPause() {
+        super.onPause();
+        mySound.release();
+    }
+
+    public void Mute(View v) {
+        CheckBox checkBox = (CheckBox) v;
+        if (checkBox.isChecked()) {
+            // mute media player
+            mySound.setVolume(0, 0);
+        } else {
+            // unmute media player
+            mySound.setVolume(1, 1);
+        }
+    }
 }
