@@ -92,11 +92,10 @@ public class PlayerService {
         playerRepository.saveAndFlush(playerEntity);
     }
     
-    public void setActive(boolean playerActive) {
-        
-       PlayerEntity playerEntity = playerRepository.findPlayerByActive(playerActive);
-        PlayerEntity  PlayerEntity  = playerRepository.setActive(true);
-         playerRepository.save(PlayerEntity);
+    public void setOnline(boolean isOnline, long playerId) {
+        PlayerEntity player = playerRepository.findOne(playerId);
+        player.setOnline(isOnline);
+        playerRepository.save(player);
     }
 
     

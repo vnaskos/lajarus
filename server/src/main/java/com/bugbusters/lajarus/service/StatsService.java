@@ -43,4 +43,12 @@ public class StatsService {
         statsRepository.deleteById(id);
     }
 
+    public StatsEntity getStatsByType(String type) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void createStats(StatsEntity statsEntity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
