@@ -58,9 +58,25 @@ public class first extends AppCompatActivity {
         mySound = MediaPlayer.create(this,R.raw.musictheme);
 
         mySound.setLooping(true);
+        this.playMusic(mySound);
 
+        CheckBox yourCheckBox = (CheckBox) findViewById (R.id.checkBox);
 
+        yourCheckBox.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                //is chkIos checked?
+                if (((CheckBox) v).isChecked()) {
+                    mySound.setVolume(0, 0);
+                }
+                else
+                {
+                    mySound.setVolume(1, 1);
+                }
+
+            }
+        });
         /*t= (TextView) findViewById(R.id.button6);
         Typeface myCustomFont= Typeface.createFromAsset(getAssets(), "fonts/trajanus.ttf");
         t.setTypeface(myCustomFont);
@@ -75,23 +91,12 @@ public class first extends AppCompatActivity {
     }
 
 
-    public void playMusic(View view) {
-        mySound.start();
+    public void playMusic(MediaPlayer song) {
+        song.start();
     }
 
     protected void onPause() {
         super.onPause();
         mySound.release();
-    }
-
-    public void Mute(View v) {
-        CheckBox checkBox = (CheckBox) v;
-        if (checkBox.isChecked()) {
-            // mute media player
-            mySound.setVolume(0, 0);
-        } else {
-            // unmute media player
-            mySound.setVolume(1, 1);
-        }
     }
 }
