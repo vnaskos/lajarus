@@ -370,6 +370,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             nearbyQuests.put(name, latLng);
         }
 
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -390,13 +391,25 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 for(String name : nearbyQuests.keySet()) {
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(nearbyQuests.get(name));
-                    markerOptions.title("Quest: " + name);
+                    markerOptions.title(name);
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                     Marker m = mGoogleMap.addMarker(markerOptions);
                     questMarkers.put(name, m);
+                    mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            String name= marker.getTitle();
+
+                            if (name.equalsIgnoreCase("myQuest1"))
+                            {
+                                Intent intent = new Intent(MapActivity.this,QuestActivity.class);
+                                startActivity(intent);
+                            }
+                            return false;
+                        }
+                    });
                 }
             }
         });
     }
-
 }
