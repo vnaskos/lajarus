@@ -1,5 +1,7 @@
 package com.bugbusters.lajarus;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +10,14 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class QuestActivity extends AppCompatActivity {
+
+
+    private Runnable task = new Runnable() {
+        public void run() {
+            Intent intent = new Intent(QuestActivity.this,MapActivity.class);
+            startActivity(intent);
+        }
+    };
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
@@ -20,12 +30,19 @@ public class QuestActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Nooooooo!",
                             Toast.LENGTH_SHORT).show();
+
+                Handler handler = new Handler();
+                int millisDelay = 3000;
+                handler.postDelayed(task, millisDelay);
                     break;
             case R.id.radioButton2:
                 if (checked)
                     Toast.makeText(getApplicationContext(),
                             "Success!",
                             Toast.LENGTH_SHORT).show();
+                    Handler handler1 = new Handler();
+                    int millisDelay1 = 3000;
+                    handler1.postDelayed(task, millisDelay1);
                     break;
         }
     }
