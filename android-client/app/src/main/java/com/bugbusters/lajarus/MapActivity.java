@@ -65,7 +65,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         but1 = (Button)findViewById(R.id.button4);
         but1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Intent toy = new Intent(MapActivity.this,items.class);
+                Intent toy = new Intent(MapActivity.this,ItemsActivity.class);
                 startActivity(toy);
             }
         });
