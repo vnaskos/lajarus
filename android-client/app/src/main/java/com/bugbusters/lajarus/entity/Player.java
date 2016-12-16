@@ -10,9 +10,6 @@ import org.json.JSONObject;
  */
 
 public class Player {
-
-    private static long idGen = 0;
-
     private long id;
     private String name;
 
@@ -39,7 +36,7 @@ public class Player {
 
     public  static Player createFromJson(JSONObject json) throws JSONException {
         Builder builder = new Builder();
-        builder.id(idGen++); //TODO: get the actual player id from the server
+        builder.id(json.getLong("id"));
         builder.name(json.getString("name"));
         return builder.build();
     }

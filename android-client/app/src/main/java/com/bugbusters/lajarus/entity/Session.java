@@ -40,6 +40,6 @@ public class Session {
     }
 
     public Player getActivePlayer() {
-        return user.getPlayer(activePlayerId);
+        return user.getFirstPlayer();
     }
 }

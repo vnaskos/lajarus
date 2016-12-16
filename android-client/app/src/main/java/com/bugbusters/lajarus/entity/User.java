@@ -17,6 +17,8 @@ public class User {
     private String username;
     private Map<Long, Player> players;
 
+    private static long firstPlayerId;
+
     public User() {
         players = new HashMap<>();
     }
@@ -51,9 +53,7 @@ public class User {
         return players.get(pid);
     }
 
-    public void setPlayers(Map<Long, Player> players) {
-        this.players = players;
-    }
+    public Player getFirstPlayer() { return players.get(firstPlayerId); }
 
     public static User createFromJson(JSONObject json) throws JSONException {
         Builder builder = new Builder();
@@ -90,6 +90,7 @@ public class User {
 
         public Builder player(Player player) {
             players.put(player.getId(), player);
+            User.firstPlayerId = player.getId();
             return this;
         }
 
