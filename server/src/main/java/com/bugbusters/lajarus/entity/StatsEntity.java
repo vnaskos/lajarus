@@ -1,9 +1,13 @@
 package com.bugbusters.lajarus.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +21,9 @@ public class StatsEntity {
 
     @Column(name = "level", nullable = false)
     private int level;
+    
+    @Column(name = "xp", nullable = false)
+    private int xp;
 
     @Column(name = "health", nullable = false)
     private int health;
@@ -29,6 +36,11 @@ public class StatsEntity {
 
     @Column(name = "speed", nullable = false)
     private int speed;
+    
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="player")
+    private PlayerEntity player;
 
     public StatsEntity() {
 
@@ -60,6 +72,14 @@ public class StatsEntity {
      */
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int exp) {
+        this.xp = xp;
     }
 
     /**
@@ -118,4 +138,14 @@ public class StatsEntity {
         this.speed = speed;
     }
 
+    public PlayerEntity getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(PlayerEntity player) {
+        this.player = player;
+    }
+
+    
+    
 }

@@ -17,8 +17,8 @@ public class StatsService {
 
     }
 
-    public StatsEntity getStatsById(long id) throws Exception {
-        StatsEntity statsEntity = statsRepository.findById(id);
+    public StatsEntity getStatsByPlayerId(Long id) throws Exception {
+        StatsEntity statsEntity = statsRepository.findByPlayerId(id);
         if (statsEntity == null) {
             throw new Exception("Empty Stats values");
         }
@@ -30,25 +30,12 @@ public class StatsService {
         return statsRepository.findAll();
     }
 
-    public void createStats(int health, int power, int defence, int speed) {
-        StatsEntity statsEntity = new StatsEntity();
-        statsEntity.setPower(power);
-        statsEntity.setDefence(defence);
-        statsEntity.setHealth(health);
-        statsEntity.setSpeed(speed);
-        statsRepository.saveAndFlush(statsEntity);
-    }
-
     public void deleteStats(long id) {
         statsRepository.deleteById(id);
     }
 
-    public StatsEntity getStatsByType(String type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void createStats(StatsEntity statsEntity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void saveStats(StatsEntity statsEntity) {
+        statsRepository.saveAndFlush(statsEntity);
     }
 
 }
