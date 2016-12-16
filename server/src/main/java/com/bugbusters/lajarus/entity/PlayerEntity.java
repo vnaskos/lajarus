@@ -4,6 +4,7 @@ import com.bugbusters.lajarus.security.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -47,6 +49,9 @@ public class PlayerEntity implements Serializable {
             joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")})
     private Set<ItemEntity> inventory;
+    
+    @OneToOne(mappedBy = "player", cascade = CascadeType.ALL)
+    private StatsEntity stats;
     
     public PlayerEntity() {
 
@@ -106,5 +111,13 @@ public class PlayerEntity implements Serializable {
 
     public void setInventory(Set<ItemEntity> inventory) {
         this.inventory = inventory;
+    }
+
+    public StatsEntity getStats() {
+        return stats;
+    }
+
+    public void setStats(StatsEntity stats) {
+        this.stats = stats;
     }
 }

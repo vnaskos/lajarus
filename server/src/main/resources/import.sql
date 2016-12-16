@@ -25,6 +25,8 @@ INSERT INTO item (id, name, description, type, value, price) VALUES (1, 'Shield'
 INSERT INTO item (id, name, description, type, value, price) VALUES (2, 'Axe', 'battle axe,is an axe specifically designed for attack', 'Attack', 90,50);
 INSERT INTO item (id, name, description, type, value, price) VALUES (3, 'Arrow', 'An arrow is a shafted projectile that is shot with a bow', 'Attack', 70,30);
 INSERT INTO item (id, name, description, type, value, price) VALUES (4, 'Elixir', 'Elixir of life,You gain Life Points (HP)', 'HP', 100,60);
-INSERT INTO item (id, name, description, type, value, price) VALUES (5 'Energy', 'energy equipment,provide speed', 'Defence', 100,60);
+INSERT INTO item (id, name, description, type, value, price) VALUES (5, 'Energy', 'energy equipment,provide speed', 'Defence', 100,60);
+
+INSERT INTO stats (id, player, level, xp, health, power, defence, speed) VALUES (1, 1, 1, 0, 100, 1, 1, 1);
 
 INSERT INTO player_item (player_id, item_id) VALUES (1, 1);
