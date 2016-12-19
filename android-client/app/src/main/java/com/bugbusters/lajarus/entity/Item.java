@@ -9,7 +9,7 @@ public class Item {
     private String name;
     private String description;
 
-    public Item() {}
+    public Item(Class<Item> itemClass) {}
 
     public Item(long id) {
         this.id = id;
@@ -62,4 +62,6 @@ public class Item {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }
