@@ -15,11 +15,6 @@ package com.bugbusters.lajarus.model;
     So we want an Entity Many to Many, it is the model that the descripte
     ths entity.
 */
-/*
-    Logic: Every player has got a list of quests that he can do it
-    So we want an Entity Many to Many, it is the model that the descripte
-    ths entity.
-*/
 public class PlayerQuestForm {
     
     private long playerid;
