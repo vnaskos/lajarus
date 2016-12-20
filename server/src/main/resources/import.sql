@@ -30,3 +30,5 @@ INSERT INTO item (id, name, description, type, value, price) VALUES (5, 'Energy'
 INSERT INTO stats (id, player, level, xp, health, power, defence, speed) VALUES (1, 1, 1, 0, 100, 1, 1, 1);
 
 INSERT INTO player_item (player_id, item_id) VALUES (1, 1);
+
+INSERT INTO player_quest (player_id, quest_id) VALUES (1, 1);
