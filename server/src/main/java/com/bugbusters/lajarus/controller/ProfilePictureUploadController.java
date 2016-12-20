@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping(value = "/file")
 public class ProfilePictureUploadController {
 
     private final StorageService storageService;
@@ -52,7 +53,7 @@ public class ProfilePictureUploadController {
                 .body(file);
     }
 
-    @PostMapping("/")
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
 
