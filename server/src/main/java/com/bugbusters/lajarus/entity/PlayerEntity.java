@@ -45,6 +45,15 @@ public class PlayerEntity implements Serializable {
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
+            name = "player_quest",
+            joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "quest_id", referencedColumnName = "id")}
+    )
+    private Set<QuestEntity> bookOfQuests;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    
+    @JoinTable(
             name = "player_item",
             joinColumns = {@JoinColumn(name = "player_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")})

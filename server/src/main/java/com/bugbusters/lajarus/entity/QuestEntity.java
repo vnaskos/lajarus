@@ -1,9 +1,13 @@
 package com.bugbusters.lajarus.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +30,10 @@ public class QuestEntity {
     
     @Column(name = "description", nullable = false)
     private String description;
+    
+    @JsonIgnore
+    @ManyToMany(mappedBy = "bookOfQuests", fetch = FetchType.LAZY)
+    private Set<PlayerEntity> players;
     
     public QuestEntity() {
         
@@ -99,6 +107,20 @@ public class QuestEntity {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * @return the players
+     */
+    public Set<PlayerEntity> getPlayers() {
+        return players;
+    }
+
+    /**
+     * @param players the players to set
+     */
+    public void setPlayers(Set<PlayerEntity> players) {
+        this.players = players;
     }
     
     
