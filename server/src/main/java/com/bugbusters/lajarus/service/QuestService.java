@@ -10,13 +10,7 @@ import com.bugbusters.lajarus.entity.QuestEntity;
 import com.bugbusters.lajarus.repository.QuestRepository;
 import com.bugbusters.lajarus.repository.PlayerRepository;
 
-/*
-    Type: Service
-    This Service is the midlman between the QuestController and the QuestEntity
-    with is conected with the Database with the support of the spring framework.
-    This is receiving the informations from the controller and modifying it for the
-    needs of the client applications.
-*/
+
 /*
     Type: Service
     This Service is the midlman between the QuestController and the QuestEntity
@@ -27,18 +21,17 @@ import com.bugbusters.lajarus.repository.PlayerRepository;
 
 @Service
 public class QuestService {
-    //An object of QuestRepository Interface that acces directly to the database
+    
     //An object of QuestRepository Interface that acces directly to the database
     @Autowired
     private QuestRepository questRepository;
     
-    //An object of PlayerRepository Interface that acces directly to the database
+    
     //An object of PlayerRepository Interface that acces directly to the database
     @Autowired
     private PlayerRepository playerRepository;
     
-    //This method of the service is returning the quest with a specific @param id
-    //Also it is checking if the data that would be returned is NULL or not
+    
     //This method of the service is returning the quest with a specific @param id
     //Also it is checking if the data that would be returned is NULL or not
     public QuestEntity getQuestById(long id) throws Exception {
@@ -56,23 +49,19 @@ public class QuestService {
         return questRepository.findAll();
     }
     
-    //Method of service that creats a new quest on Database
+    
     //Method of service that creats a new quest on Database
     public void createQuest(QuestEntity questEntity) {
         questRepository.saveAndFlush(questEntity);
     }
     
-    //Deleting the quest wit ha specific @param id
+    
     //Deleting the quest wit ha specific @param id
     public void deleteQuest(long id) {
         questRepository.deleteQuest(id);
     }
     
-    /*
-        A list of quests that are returning to the controller for the quests
-        that are near to the player with a specific @param name (the name of the players)
-        with the help of geolocation
-    */
+    
     /*
         A list of quests that are returning to the controller for the quests
         that are near to the player with a specific @param name (the name of the players)
@@ -85,10 +74,7 @@ public class QuestService {
         return nearbyQuests;
     }
     
-    /* 
-        A service method that check if there is a quest with a specific @param name
-        and returing true or false
-    */
+    
     /* 
         A service method that check if there is a quest with a specific @param name
         and returing true or false
