@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.bugbusters.lajarus.manager.TokenManager;
 import com.bugbusters.lajarus.util.HttpRequestDispatcher;
 import com.bugbusters.lajarus.util.Config;
 
@@ -101,9 +102,15 @@ public class RegisterActivity extends AppCompatActivity {
     public void performRegister() throws JSONException {
         final JSONObject body = new JSONObject();
 
-        body.put("username", fields[USERNAME_FIELD].getText().toString().trim());
-        body.put("password", fields[PASSWORD_FIELD].getText().toString().trim());
+        final String username = fields[USERNAME_FIELD].getText().toString().trim();
+        final String password = fields[PASSWORD_FIELD].getText().toString().trim();
+
+        body.put("username", username);
+        body.put("password", password);
         body.put("email", fields[EMAIL_FIELD].getText().toString().trim());
+
+        final JSONObject playerBody = new JSONObject();
+        playerBody.put("name", fields[USERNAME_FIELD].getText().toString().trim());
 
         Log.d("Register", body.toString());
 
@@ -113,9 +120,18 @@ public class RegisterActivity extends AppCompatActivity {
                 String registerUrl = Config.getHttpURL().concat("auth/register");
 
                 final JSONObject response = HttpRequestDispatcher.performPOST(registerUrl, body);
+                String token = "";
+                try {
+                    token = TokenManager.getInstance().createToken(username, password);
+                } catch (Exception e) {
+
+                }
+
+                String playerUrl = Config.getHttpURL().concat("player/create");
+                final JSONObject response2 = HttpRequestDispatcher.performPOST(playerUrl, playerBody, token);
 
                 //Display result
-                if (response != null) {
+                if (response2 != null) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
