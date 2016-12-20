@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/profile_back">
+
+    <TextView
+        android:text="Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/playerNameTextView"
+        android:textSize="22sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:background="#FFF"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/paladin_male"
+        android:id="@+id/imageView"
+        android:layout_margin="10sp" />
+
+    <TextView
+        android:text="Level: 1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/levelTextView"
+        android:background="#EEE"
+        android:textColor="#000" />
+
+    <TextView
+        android:text="XP: 124"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/xpTextView"
+        android:background="#EEE"
+        android:textColor="#000" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar3"
+        android:max="100"
+        android:progress="50"
+        android:background="#EEE"/>
+
+    <TextView
+        android:text="Health: 100"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/healthTextView"
+        android:background="#EEE"
+        android:textColor="#000" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar4"
+        android:max="100"
+        android:progress="100"
+        android:background="#EEE"/>
+
+    <TextView
+        android:text="Power: 1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/powerTextView"
+        android:background="#EEE"
+        android:textColor="#000" />
+
+    <TextView
+        android:text="Defense: 2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/defenseTextView"
+        android:background="#EEE"
+        android:textColor="#000" />
+
+    <TextView
+        android:text="Speed: 1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/speedTextView"
+        android:background="#EEE"
+        android:textColor="#000" />
+
+    <Button
+        android:text="Back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backButton" />
+
+    <Button
+        android:text="Logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/logoutBtn" />
+</LinearLayout>
