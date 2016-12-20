@@ -60,13 +60,22 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private Map<String, Marker> playerMarkers;
     private Map<String, Marker> questMarkers;
     public Button but1;
+    private Button profileBtn;
 
-    public void init(){
+    private void init(){
         but1 = (Button)findViewById(R.id.button4);
         but1.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Intent toy = new Intent(MapActivity.this,ItemsActivity.class);
                 startActivity(toy);
+            }
+        });
+        profileBtn = (Button) findViewById(R.id.button3);
+        profileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent profileActivity = new Intent(MapActivity.this, ProfileActivity.class);
+                startActivity(profileActivity);
             }
         });
     }

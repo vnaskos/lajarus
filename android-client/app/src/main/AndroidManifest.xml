@@ -50,6 +50,7 @@
 
         <activity android:name=".ItemsActivity" />
         <activity android:name=".QuestActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
