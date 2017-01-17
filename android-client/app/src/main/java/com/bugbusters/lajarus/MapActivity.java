@@ -357,7 +357,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(nearbyPlayers.get(name));
                     markerOptions.title("Player: " + name);
-                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.raw.player_marker));
+                    markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.barbarian));
                     Marker m = mGoogleMap.addMarker(markerOptions);
                     playerMarkers.put(name, m);
                 }

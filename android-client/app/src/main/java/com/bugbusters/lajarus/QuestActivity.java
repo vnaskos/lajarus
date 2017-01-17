@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuestActivity extends AppCompatActivity {
@@ -51,7 +52,7 @@ public class QuestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest);
-        EditText editText =(EditText)findViewById(R.id.editText2);
+        TextView editText =(TextView)findViewById(R.id.editText2);
         editText.setText(" O Ηρακλής διατάχθηκε από τον Ευρυσθέα να οδηγήσει στις Μυκήνες από την Ερύθεια, ένα απομονωμένο νησί στον Ωκεανό, τα βόδια του βασιλιά Γηρυόνη, γιου του Χρυσάορα και της Καλλιρρόης. Μετά από μακρά και περιπετειώδη πορεία στις χώρες της Μεσογείου, και αφού μονομάχησε με τον Γηρυόνη στις ακτές του ποταμού Ανθεμούντα, έφτασε στις ιωνικές ακτές της Ελλάδας, όπου μια βοϊδόμυγα, σταλμένη από την Ήρα, τρέλανε το κοπάδι και το έκανε να διασκορπιστεί στα βουνά της Θράκης.\n" +
                 "Ο Ηρακλής κατηγόρησε τον Στρυμόνα, ότι δυσκόλεψε το έργο του να συγκεντρώσει τα ζώα. Τον γέμισε λοιπόν με πέτρες, και από τότε ο ποταμός έπαψε να είναι πλωτός (Απολλόδ. 2.112).\n" +
                 "Σύμφωνα με άλλη εκδοχή του μύθου, ο Ηρακλής δεν μπορούσε να διασχίσει τον ποταμό επειδή δεν υπήρχε πέρασμα. Έριξε λοιπόν τεράστιους βράχους εμποδίζοντας τα πλοία να τον διαπλέουν.\n" +

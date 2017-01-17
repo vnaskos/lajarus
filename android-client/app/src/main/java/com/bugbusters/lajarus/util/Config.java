@@ -6,10 +6,10 @@ package com.bugbusters.lajarus.util;
 
 public class Config {
 
-    private static final String BASE_URL = "155.254.33.123";
+    private static final String BASE_URL = "192.168.1.3";
     private static final String APPLICATION_PATH = "/";
-    private static final String WEBSOCKET_PORT = ":8081";
-    private static final String HTTP_PORT = ":8081";
+    private static final String WEBSOCKET_PORT = ":8080";
+    private static final String HTTP_PORT = ":8080";
 
     public static String getHttpURL() {
         return "http://"
