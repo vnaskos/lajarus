@@ -16,7 +16,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.jsondoc.core.annotation.ApiObjectField;
 
+/**
+ * Database mapping of the player table
+ */
 @Entity
 @Table(name = "player")
 public class PlayerEntity implements Serializable {
@@ -59,6 +63,7 @@ public class PlayerEntity implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")})
     private Set<ItemEntity> inventory;
     
+    @ApiObjectField(description = "Stats", processtemplate = false)
     @OneToOne(mappedBy = "player", cascade = CascadeType.ALL)
     private StatsEntity stats;
     

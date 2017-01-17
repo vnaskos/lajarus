@@ -10,7 +10,7 @@ import org.springframework.validation.Validator;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 @Component
 public class UserValidator implements Validator {

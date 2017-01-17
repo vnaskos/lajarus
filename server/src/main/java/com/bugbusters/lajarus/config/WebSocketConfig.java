@@ -8,8 +8,9 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 /**
- *
- * @author Vasilis Naskos <vnaskos.com>
+ * Websocket endpoint configuration
+ * 
+ * @author Vasilis Naskos
  */
 @Configuration
 @EnableWebSocket

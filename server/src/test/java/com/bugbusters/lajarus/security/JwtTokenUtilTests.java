@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 public class JwtTokenUtilTests {
     private JwtTokenUtil jwtTokenUtil;

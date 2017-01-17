@@ -14,54 +14,93 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.bugbusters.lajarus.validation.QuestValidator;
 import com.bugbusters.lajarus.validation.ValidationErrorBuilder;
+import org.jsondoc.core.annotation.Api;
+import org.jsondoc.core.annotation.ApiAuthToken;
+import org.jsondoc.core.annotation.ApiMethod;
+import org.jsondoc.core.annotation.ApiPathParam;
+import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
 
-/* 
-    Description: This Controller is receiving data from requests of the client
-    and with the support of Services updating, creating or deleting Quests from the Database.
-    It is supported with the spring framework.
-*/ 
-
-
+/**
+ * This Controller is receiving data from requests of the client,
+ * with the support of QuestService it updates, creates or deletes
+ * Quests from the Database.
+ * 
+ * @author karen
+ */
 @RestController
 @RequestMapping(value = "/quest")
+@Api(name = "Quest Managment Controller",
+        description = "Provides methods for quest managment (CRUD)",
+        stage = ApiStage.RC)
+@ApiAuthToken()
 public class QuestController {
     
-    //The Service is the midlman that connects Controller with the Database
     @Autowired
     private QuestService questService;
     
-    //Validator is checking the validity of data that the server receive
     @Autowired
     private QuestValidator questValidator;
     
-    //Responsing the Quest to the client via @param id
+    /**
+     * Retrieve quest by id
+     * 
+     * @param id quest id
+     * @return Quest
+     * @throws Exception 
+     */
     @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
-    public QuestEntity getQuestById(@PathVariable long id) throws Exception {
+    @ApiMethod(description = "Retrieve a specific quest")
+    public QuestEntity getQuestById(
+            @ApiPathParam(name = "id", description = "Quest id")
+            @PathVariable long id) throws Exception {
         return questService.getQuestById(id);
     }
     
-    //The responsing for sending to the client the quests that are near to him via geolocation, @param name
+    /**
+     * Get quests near a given location
+     * The location is retrieved by the player's profile
+     * 
+     * @param name player name
+     * @return List of Quests
+     * @throws Exception 
+     */
     @RequestMapping(value = "/near/player/{name}", method = RequestMethod.GET)
-    public List<QuestEntity> getNearbyQuest(@PathVariable String name) throws Exception {
+    @ApiMethod(description = "Get quests near a given player's location")
+    public List<QuestEntity> getNearbyQuest(
+            @ApiPathParam(name = "name",
+                    description = "The player's name to get the location from")
+            @PathVariable String name) throws Exception {
         return questService.getNearbyQuests(name);
     }
     
-    //The Responsing to the client to send to the client all the Quests
-    //Warining: If the Quests ara too many on Database maybe will be a crush
-    //ToDO: It could be change with a method that will send to the client a specific
-    //number of data every time
+    /**
+     * Get all quests 
+     * Highly not recommended for production use
+     * 
+     * @return List of Quests
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @ApiMethod(description = "Retrieve all quests (only for debugging reasons)")
     public List<QuestEntity> getAll() {
         return questService.getAll();
     }
     
-    //This controller is creating new Quest, @param questEntity, @param errors
-    //@RequestMapping(value = "/create/name/{name}/location/{latitude}/{longitude}/description/{description}", method = RequestMethod.POST)
+    /**
+     * Create a new quest
+     * 
+     * @param questEntity details about the new Quest
+     * @param errors
+     * @return HTTP codes (200 for success)
+     * @throws Exception 
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<?> createQuest(@RequestBody QuestEntity questEntity, Errors errors) throws Exception {
+    @ApiMethod(description = "Create a new quest")
+    public ResponseEntity<?> createQuest(
+            @ApiPathParam(name = "questEntity",
+                    description = "Object with details about the new Quest")
+            @RequestBody QuestEntity questEntity,
+            Errors errors) throws Exception {
         questValidator.validate(questEntity, errors);
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest()
@@ -72,9 +111,16 @@ public class QuestController {
         return ResponseEntity.ok(questEntity);
     }
     
-    //The controller is for deleting the quest with sepcific @param id
+    /**
+     * Delete a quest by id
+     * 
+     * @param id Quest id
+     */
     @RequestMapping(value = "/delete/id/{id}", method = RequestMethod.POST)
-    public void deleteQuest(@PathVariable long id) {
+    @ApiMethod(description = "Delete quest by id")
+    public void deleteQuest(
+            @ApiPathParam(name = "id", description = "Quest id")
+            @PathVariable long id) {
         questService.deleteQuest(id);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 public class DefaultExceptionAttributes implements ExceptionAttributes {
 

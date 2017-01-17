@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+/**
+ * Database mapping of quest table
+ */
 @Entity
 @Table(name = "quest")
 public class QuestEntity {

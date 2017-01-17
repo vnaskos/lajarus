@@ -10,10 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bugbusters.lajarus.security.JwtTokenUtil;
 import com.bugbusters.lajarus.security.JwtUser;
 import com.bugbusters.lajarus.service.JwtUserDetailsServiceImpl;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Controller for user management,
+ * get user by the authentication token
+ * 
+ * @author vasilis
+ */
 @RestController
 @RequestMapping(value = "user", method = RequestMethod.GET)
 public class UserController {
@@ -27,6 +32,12 @@ public class UserController {
     @Autowired
     private JwtUserDetailsServiceImpl userService;
 
+    /**
+     * Get user from the provided auth token
+     * 
+     * @param request
+     * @return 
+     */
     @RequestMapping(method = RequestMethod.GET)
     public JwtUser getAuthenticatedUser(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);

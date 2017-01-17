@@ -4,8 +4,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
- * @author Vasilis Naskos <vnaskos.com>
+ * Enable "storage" functionalities,
+ * used for profile image upload
+ * 
+ * @author Vasilis Naskos
  */
 @Configuration
 @EnableConfigurationProperties(StorageProperties.class)

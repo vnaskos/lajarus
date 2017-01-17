@@ -20,21 +20,16 @@ import org.jsondoc.core.annotation.ApiMethod;
 import org.jsondoc.core.annotation.ApiPathParam;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
-/* 
-    Description: This Controller is receiving data from requests of the client
-    and with the support of Services updating, creating or deleting Quests from the Database.
-    It is supported with the spring framework.
-*/
-
+/**
+ * Controller for player management (support of CRUD actions)
+ */
 @RestController
 @RequestMapping(value = "/player")
 @Api(name = "Player managment API", description = "Manage players")
 @ApiAuthToken()
 public class PlayerController {
 
-    //The Service is the midlman that connects Controller with the Database
     @Autowired
     private PlayerService playerService;
     
@@ -44,23 +39,25 @@ public class PlayerController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     
-    /*
-        This method Controller is returning to the client all the players
-        Warning: If there are too many players inside of teh database, then
-        returning them all may cause many problems.
-        ToDo:A Better to switch with a method that will request a specific number
-        of data.
-    */
+    /**
+     * Get all players (for debugging reasons)
+     * Highly not recommended for production usage
+     * 
+     * @return List of ALL Players 
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    @ApiMethod(description = "Get all players")
+    @ApiMethod(description = "Get all players (for debugging reasons)")
     public List<PlayerEntity> findAll() {
         return playerService.findAll();
     }
     
-    /*
-        This Controller is returning the player informations with a specific given
-        @param name.
-    */
+    /**
+     * Get a specific player by name
+     * 
+     * @param name Player name
+     * @return a single player
+     * @throws Exception 
+     */
     @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
     @ApiMethod(description = "Get player by name")
     public PlayerEntity findPlayerByName(
@@ -69,10 +66,16 @@ public class PlayerController {
             throws Exception {
         return playerService.findPlayerByName(name);
     }
-    /*
-        This Controller is returning a list of players that are near to the current
-        player  who requested to the server.
-    */
+    
+    /**
+     * Get players near to a given location
+     * The location is retrieved by the requested
+     * player's latitude and longitude
+     * 
+     * @param name Player who made the request
+     * @return List of Players
+     * @throws Exception 
+     */
     @RequestMapping(value = "/near/{name}", method = RequestMethod.GET)
     @ApiMethod(description = "Get players near the requested player")
     public List<PlayerEntity> findPlayersNearby(
@@ -81,10 +84,14 @@ public class PlayerController {
             @PathVariable String name) throws Exception {
         return playerService.getNearbyPlayers(name);
     }
-    /*
-        This controller is requested for posting the new positions of
-        the current player's position on the database.
-    */
+    /**
+     * Update current location of a player
+     * 
+     * @param name Player name
+     * @param latitude New latitude
+     * @param longitude New longitude
+     * @throws Exception 
+     */
     @RequestMapping(value = "/{name}/location/{latitude}/{longitude}",
             method = RequestMethod.POST)
     @ApiMethod(description = "Update player's current location")
@@ -101,12 +108,12 @@ public class PlayerController {
         playerService.updatePlayerLocation(name, latitude, longitude);
     }
     
-    /*
-        THis controller is requested to post (create) a new player, with @params request,
-        @param playerEntity
-        @RequestBody Annotation is from spring framework witch is affecting the architecture
-        of requesting
-    */
+    /**
+     * Create a new player
+     * 
+     * @param request
+     * @param playerEntity Player details
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public void createPlayer(HttpServletRequest request,
             @RequestBody PlayerEntity playerEntity) {
@@ -114,31 +121,37 @@ public class PlayerController {
         String username = jwtTokenUtil.getUsernameFromToken(token);
         playerService.createPlayerForUser(playerEntity, username);
     }
-    /*
-        Every player has got inventory and inside of this has got a items.
-        Every player can have got more than 1 item in the inventory.
-        This controller adds a new item on the inventory.
-    */
+    
+    /**
+     * Insert item to players inventory
+     * 
+     * @param request
+     * @param playerItem Item to be inserted
+     */
     @RequestMapping(value = "/addItem", method = RequestMethod.PUT)
     public void addItem(HttpServletRequest request,
             @RequestBody PlayerItemForm playerItem) {
         playerService.addItem(playerItem.getPlayerId(), playerItem.getItemId());
     }
-    /*
-        Every player has got inventory and inside of this has got a items.
-        Every player can have got more than 1 item in the inventory.
-        This controller removes an item from the inventory.
-    */
+    
+    /**
+     * Delete / Remove item from player's inventory
+     * 
+     * @param request
+     * @param playerItem Item to be removed 
+     */
     @RequestMapping(value = "/removeItem", method = RequestMethod.DELETE)
     public void removeItem(HttpServletRequest request,
             @RequestBody PlayerItemForm playerItem) {
         playerService.removeItem(playerItem.getPlayerId(), playerItem.getItemId());
     }
-    /*
-        There can be many players on the Database but less of them are online.
-        This Controller is requesting to put online a player who logged into the
-        game.
-    */
+    
+    /**
+     * Update players online / availability status
+     * 
+     * @param request
+     * @param playerOnline Player id and online status
+     */
     @RequestMapping(value = "/online", method = RequestMethod.PUT)
     public void setOnline(HttpServletRequest request,
             @RequestBody PlayerOnlineForm playerOnline) {

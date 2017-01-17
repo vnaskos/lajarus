@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 public class ValidationErrorBuilder {
     

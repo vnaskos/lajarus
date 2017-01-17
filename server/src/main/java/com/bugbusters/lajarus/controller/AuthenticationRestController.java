@@ -29,6 +29,12 @@ import org.jsondoc.core.annotation.ApiMethod;
 import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.validation.Errors;
 
+/**
+ * Controller for authentication processes
+ * create token - login, refresh token, register user
+ * 
+ * @author Vasilis Naskos
+ */
 @RestController
 @RequestMapping(value = "/auth")
 @Api(name = "User authentication API",
@@ -51,6 +57,14 @@ public class AuthenticationRestController {
     @Autowired
     private UserValidator userValidator;
 
+    /**
+     * Create new authentication key with the provided credentials
+     * 
+     * @param authenticationRequest Username and password as JSON
+     * @param device
+     * @return auth key as JSON
+     * @throws AuthenticationException 
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiMethod(description = "Create authentication token")
     public ResponseEntity<?> createAuthenticationToken(
@@ -74,6 +88,12 @@ public class AuthenticationRestController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token));
     }
 
+    /**
+     * Refresh an expired auth key
+     * 
+     * @param request
+     * @return refreshed auth key as JSON
+     */
     @RequestMapping(value = "/refresh", method = RequestMethod.GET)
     @ApiMethod(description = "Refresh an existing authentication token")
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
@@ -89,6 +109,14 @@ public class AuthenticationRestController {
         }
     }
     
+    /**
+     * Register a new user by providing the appropriate info
+     * 
+     * @param request
+     * @param userForm details about the new user (username, pass, ...)
+     * @param errors errors after details check
+     * @return username if process was successful
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ApiMethod(description = "Register a new user")
     public ResponseEntity<?> registerUser(HttpServletRequest request,

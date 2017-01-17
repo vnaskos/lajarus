@@ -9,7 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.jsondoc.core.annotation.ApiObjectField;
 
+/**
+ * Database mapping of stats table
+ * 
+ * @author xaris
+ */
 @Entity
 @Table(name = "stats")
 public class StatsEntity {
@@ -37,6 +43,7 @@ public class StatsEntity {
     @Column(name = "speed", nullable = false)
     private int speed;
     
+    @ApiObjectField(description = "Players", processtemplate = false)
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="player")

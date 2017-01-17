@@ -12,7 +12,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 public abstract class AbstractControllerTest extends AbstractTest {
     

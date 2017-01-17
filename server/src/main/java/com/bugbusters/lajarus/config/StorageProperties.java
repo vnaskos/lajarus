@@ -1,9 +1,12 @@
-
 package com.bugbusters.lajarus.config;
-
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ * File upload configuration
+ * 
+ * @author alexavge
+ */
 @ConfigurationProperties("storage")
 public class StorageProperties {
 

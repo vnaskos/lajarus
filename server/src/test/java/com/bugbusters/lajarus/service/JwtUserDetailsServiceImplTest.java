@@ -1,6 +1,5 @@
 package com.bugbusters.lajarus.service;
 
-import com.bugbusters.lajarus.service.JwtUserDetailsServiceImpl;
 import com.bugbusters.lajarus.AbstractTest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 public class JwtUserDetailsServiceImplTest extends AbstractTest {
     

@@ -1,14 +1,13 @@
 
-package com.bugbusters.lajarus.ImageUtil;
+package com.bugbusters.lajarus.utils;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-public class resizedImage {
-    
-    
+
+public class ImageResize {
     /**
      * Resizes an image to a absolute width and height (the image may not be
      * proportional)
@@ -24,7 +23,6 @@ public class resizedImage {
     
   
     public static void resize(String inputImagePath,
-           
             String outputImagePath, int scaledWidth, int scaledHeight)
             throws IOException {
         // reads input image

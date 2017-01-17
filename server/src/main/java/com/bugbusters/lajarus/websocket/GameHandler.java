@@ -21,7 +21,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 @Component
 public class GameHandler extends TextWebSocketHandler{

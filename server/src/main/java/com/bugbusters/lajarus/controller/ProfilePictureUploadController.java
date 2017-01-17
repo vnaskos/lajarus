@@ -21,13 +21,16 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/file")
 public class ProfilePictureUploadController {
 
-    private final StorageService storageService;
-
     @Autowired
-    public ProfilePictureUploadController(StorageService storageService) {
-        this.storageService = storageService;
-    }
+    private StorageService storageService;
 
+    /**
+     * Enlist all uploaded file paths (for debugging reasons)
+     * 
+     * @param model
+     * @return every uploaded filepath
+     * @throws IOException 
+     */
     @GetMapping("/")
     public String listUploadedFiles(Model model) throws IOException {
 
@@ -42,6 +45,13 @@ public class ProfilePictureUploadController {
         return "uploadForm";
     }
 
+    /**
+     * Get a specific file
+     * Usable as filter upon retrieval request
+     * 
+     * @param filename requested file
+     * @return 
+     */
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
@@ -53,6 +63,14 @@ public class ProfilePictureUploadController {
                 .body(file);
     }
 
+    /**
+     * Upload file handler, retrieve and store the uploaded file
+     * Usable as filter upon upload
+     * 
+     * @param file
+     * @param redirectAttributes
+     * @return 
+     */
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
@@ -64,6 +82,12 @@ public class ProfilePictureUploadController {
         return "redirect:/";
     }
 
+    /**
+     * Error handler for failed storage action
+     * 
+     * @param exc
+     * @return HTTP code
+     */
     @ExceptionHandler (StorageFileNotFoundException.class)
     public ResponseEntity handleStorageFileNotFound(StorageFileNotFoundException exc) {
         return ResponseEntity.notFound().build();

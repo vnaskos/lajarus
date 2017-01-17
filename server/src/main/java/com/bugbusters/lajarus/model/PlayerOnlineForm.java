@@ -7,7 +7,7 @@ package com.bugbusters.lajarus.model;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 public class PlayerOnlineForm {
     

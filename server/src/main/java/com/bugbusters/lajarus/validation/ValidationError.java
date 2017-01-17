@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  *
- * @author Vasilis Naskos <vnaskos.com>
+ * @author Vasilis Naskos
  */
 public class ValidationError {
     

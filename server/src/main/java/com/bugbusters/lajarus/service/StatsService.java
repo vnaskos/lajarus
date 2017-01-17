@@ -16,7 +16,14 @@ public class StatsService {
         this.statsRepository = statsRepository;
 
     }
-
+    
+    /**
+     * Get statistics of a player (Level, XP, Attack, ...)
+     * 
+     * @param id player id
+     * @return stats
+     * @throws Exception 
+     */
     public StatsEntity getStatsByPlayerId(Long id) throws Exception {
         StatsEntity statsEntity = statsRepository.findByPlayerId(id);
         if (statsEntity == null) {
